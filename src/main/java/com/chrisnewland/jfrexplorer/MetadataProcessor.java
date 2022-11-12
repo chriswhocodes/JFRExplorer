@@ -38,11 +38,23 @@ public class MetadataProcessor
 
 	public static void main(String[] args) throws Exception
 	{
-		MetadataProcessor metadataProcessor = new MetadataProcessor(Paths.get(args[0]));
+		if (args.length < 3)
+		{
+			System.err.println("MetadataProcessor <jdk version> <path to metadata.xml> <resources path>");
+			System.exit(-1);
+		}
+
+		String jdkVersion = args[0];
+
+		MetadataProcessor metadataProcessor = new MetadataProcessor(Paths.get(args[1]));
 
 		Model model = metadataProcessor.process();
 
 		System.out.println(model);
+
+		Path resourcesPath = Paths.get(args[2]);
+
+		HtmlGenerator.generateHtml(model, resourcesPath, resourcesPath.resolve("output/jfr_jdk" + jdkVersion + ".html"));
 	}
 
 	public MetadataProcessor(Path metadataPath)

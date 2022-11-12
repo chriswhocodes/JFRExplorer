@@ -1,5 +1,11 @@
 package com.chrisnewland.jfrexplorer.model.tag;
 
+import com.chrisnewland.jfrexplorer.util.HtmlUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 public class Field
 {
 	private String type;
@@ -24,6 +30,45 @@ public class Field
 	{
 		return "Field{" + "type='" + type + '\'' + ", contentType='" + contentType + '\'' + ", name='" + name + '\'' + ", label='"
 				+ label + '\'' + ", description='" + description + '\'' + ", relation='" + relation + '\'' + '}';
+	}
+
+	static final String[] FIELD_COLUMNS = new String[] { "Name", "Type", "ContentType", "Label", /*"Relation",*/ "Description" };
+
+	public static CharSequence rowHeader(String[] columns)
+	{
+		return HtmlUtil.tr("th", columns);
+	}
+
+	public CharSequence toRow(Set<String> columns)
+	{
+		List<Object> values = new ArrayList<>();
+
+		if (columns.contains("Name"))
+		{
+			values.add(name);
+		}
+		if (columns.contains("Type"))
+		{
+			values.add(type);
+		}
+		if (columns.contains("ContentType"))
+		{
+			values.add(contentType);
+		}
+		if (columns.contains("Label"))
+		{
+			values.add(label);
+		}
+//		if (columns.contains("Relation"))
+//		{
+//			values.add(relation);
+//		}
+		if (columns.contains("Description"))
+		{
+			values.add(description);
+		}
+
+		return HtmlUtil.tr("td", values.toArray());
 	}
 
 	public String getType()

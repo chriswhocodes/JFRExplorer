@@ -44,6 +44,36 @@ public class Model
 		xmlContentTypeList.add(xmlContentType);
 	}
 
+	public List<Event> getEventList()
+	{
+		return eventList;
+	}
+
+	public List<Field> getFieldList()
+	{
+		return fieldList;
+	}
+
+	public List<Relation> getRelationList()
+	{
+		return relationList;
+	}
+
+	public List<Type> getTypeList()
+	{
+		return typeList;
+	}
+
+	public List<XmlType> getXmlTypeList()
+	{
+		return xmlTypeList;
+	}
+
+	public List<XmlContentType> getXmlContentTypeList()
+	{
+		return xmlContentTypeList;
+	}
+
 	@Override
 	public String toString()
 	{

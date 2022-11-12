@@ -1,9 +1,12 @@
 package com.chrisnewland.jfrexplorer.model.tag;
 
+import com.chrisnewland.jfrexplorer.util.HtmlUtil;
 import com.chrisnewland.jfrexplorer.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Event
 {
@@ -36,6 +39,70 @@ public class Event
 	{
 		return "Event{" + "name='" + name + '\'' + ", categoryList=" + categoryList + ", label='" + label + '\'' + ", thread="
 				+ thread + ", startTime=" + startTime + ", stackTrace=" + stackTrace + ", fieldList=" + fieldList + '}';
+	}
+
+	public static CharSequence rowHeader()
+	{
+		return HtmlUtil.tr("th", "Name", "Categories", "Label", "Thread", "StartTime", "StackTrace", "Fields");
+	}
+
+	public CharSequence toRow()
+	{
+		return HtmlUtil.tr("td", name, categoryList.toString(), label, thread, startTime, stackTrace, getFieldHtml());
+	}
+
+	private CharSequence getFieldHtml()
+	{
+		StringBuilder fieldRows = new StringBuilder();
+
+		boolean[] hasValue = new boolean[Field.FIELD_COLUMNS.length];
+
+		for (Field field : fieldList)
+		{
+			if (field.getName() != null)
+			{
+				hasValue[0] = true;
+			}
+			if (field.getType() != null)
+			{
+				hasValue[1] = true;
+			}
+			if (field.getContentType() != null)
+			{
+				hasValue[2] = true;
+			}
+			if (field.getLabel() != null)
+			{
+				hasValue[3] = true;
+			}
+//			if (field.getRelation() != null)
+//			{
+//				hasValue[4] = true;
+//			}
+			if (field.getDescription() != null)
+			{
+				hasValue[4] = true;
+			}
+		}
+
+		List<String> usedColumns = new ArrayList<>();
+
+		for (int i = 0; i < Field.FIELD_COLUMNS.length; i++)
+		{
+			if (hasValue[i])
+			{
+				usedColumns.add(Field.FIELD_COLUMNS[i]);
+			}
+		}
+
+		Set<String> columnSet = new HashSet<>(usedColumns);
+
+		for (Field field : fieldList)
+		{
+			fieldRows.append(field.toRow(columnSet));
+		}
+
+		return HtmlUtil.table("fieldTable", Field.rowHeader(usedColumns.toArray(new String[usedColumns.size()])), fieldRows);
 	}
 
 	public String getName()

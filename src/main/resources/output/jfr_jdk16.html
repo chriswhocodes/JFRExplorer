@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JFR Events</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-3.6.1.slim.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jfr.css">
+</head>
+<body>
+<h1>JFR Explorer</h1>
+<script type="text/javascript">
+    function getParam() {
+        return window.location.href.slice(window.location.href.indexOf('?') + 1)
+            .split('=')[1];
+    };
+
+    $(document)
+        .ready(
+            function () {
+                $('#myTable')
+                    .DataTable(
+                        {
+                            "scrollX": true,
+                            "autoWidth": false,
+                            "pageLength": 50,
+                            "lengthChange": false,
+                            "columnDefs": [{
+                                "targets": [0,1,2,3,4,5,6],
+                                "orderable"
+            :
+                true,
+            }],
+                "oLanguage"
+            :
+                {
+                    "sSearch"
+                :
+                    "Search JFR Events: "
+                }
+            ,
+                initComplete: function () {
+                    this.api().search(getParam());
+
+                    this.api().draw();
+
+                    this
+                        .api()
+                        .columns( []
+                )
+                .
+                    every(
+                        function () {
+                            var column = this;
+                            var select = $(
+                                '<select><option value="">Show All</option></select>')
+                                .appendTo(
+                                    $(column.header()).empty()).on(
+                                    'change',
+                                    function () {
+                                        var val = $.fn.dataTable.util
+                                            .escapeRegex($(this)
+                                                .val());
+
+                                        column.search(
+                                            val ? '^' + val + '$'
+                                                : '', true, false)
+                                            .draw();
+                                    });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(
+                                    function (d, j) {
+                                        select
+                                            .append('<option value="' + d + '">'
+                                                + d + '</option>')
+                                    });
+                        });
+                }
+            })
+                ;
+            });
+</script>
+<div class="links">
+    <a href="jfr_jdk11.html">JDK11</a>&#160;&#160;
+    <a href="jfr_jdk12.html">JDK12</a>&#160;&#160;
+    <a href="jfr_jdk13.html">JDK13</a>&#160;&#160;
+    <a href="jfr_jdk14.html">JDK14</a>&#160;&#160;
+    <a href="jfr_jdk15.html">JDK15</a>&#160;&#160;
+    <a href="jfr_jdk16.html">JDK16</a>&#160;&#160;
+    <a href="jfr_jdk17.html">JDK17</a>&#160;&#160;
+    <a href="jfr_jdk18.html">JDK18</a>&#160;&#160;
+    <a href="jfr_jdk19.html">JDK19</a>&#160;&#160;
+    <a href="jfr_jdk20.html">JDK20</a>&#160;&#160;
+</div>
+<table id="myTable" class="display cell-border">
+<thead>
+<tr><th>Name</th><th>Categories</th><th>Label</th><th>Thread</th><th>StartTime</th><th>StackTrace</th><th>Fields</th></tr>
+</thead>
+<tbody>
+<tr><td>ThreadStart</td><td>[Java Application]</td><td>Java Thread Start</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>Thread</td><td>New Java Thread</td></tr>
+<tr><td>parentThread</td><td>Thread</td><td>Parent Java Thread</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadEnd</td><td>[Java Application]</td><td>Java Thread End</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>Thread</td><td>Java Thread</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadSleep</td><td>[Java Application]</td><td>Java Thread Sleep</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>time</td><td>long</td><td>millis</td><td>Sleep Time</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadPark</td><td>[Java Application]</td><td>Java Thread Park</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>parkedClass</td><td>Class</td><td></td><td>Class Parked On</td></tr>
+<tr><td>timeout</td><td>long</td><td>nanos</td><td>Park Timeout</td></tr>
+<tr><td>until</td><td>long</td><td>epochmillis</td><td>Park Until</td></tr>
+<tr><td>address</td><td>ulong</td><td>address</td><td>Address of Object Parked</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>JavaMonitorEnter</td><td>[Java Application]</td><td>Java Monitor Blocked</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>monitorClass</td><td>Class</td><td></td><td>Monitor Class</td></tr>
+<tr><td>previousOwner</td><td>Thread</td><td></td><td>Previous Monitor Owner</td></tr>
+<tr><td>address</td><td>ulong</td><td>address</td><td>Monitor Address</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>JavaMonitorWait</td><td>[Java Application]</td><td>Java Monitor Wait</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>monitorClass</td><td>Class</td><td></td><td>Monitor Class</td><td>Class of object waited on</td></tr>
+<tr><td>notifier</td><td>Thread</td><td></td><td>Notifier Thread</td><td>Notifying Thread</td></tr>
+<tr><td>timeout</td><td>long</td><td>millis</td><td>Timeout</td><td>Maximum wait time</td></tr>
+<tr><td>timedOut</td><td>boolean</td><td></td><td>Timed Out</td><td>Wait has been timed out</td></tr>
+<tr><td>address</td><td>ulong</td><td>address</td><td>Monitor Address</td><td>Address of object waited on</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>JavaMonitorInflate</td><td>[Java Application]</td><td>Java Monitor Inflated</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>monitorClass</td><td>Class</td><td></td><td>Monitor Class</td><td></td></tr>
+<tr><td>address</td><td>ulong</td><td>address</td><td>Monitor Address</td><td></td></tr>
+<tr><td>cause</td><td>InflateCause</td><td></td><td>Monitor Inflation Cause</td><td>Cause of inflation</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SyncOnValueBasedClass</td><td>[Java Virtual Machine, Diagnostics]</td><td>Value Based Class Synchronization</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>valueBasedClass</td><td>Class</td><td>Value Based Class</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>BiasedLockRevocation</td><td>[Java Virtual Machine, Runtime]</td><td>Biased Lock Revocation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>lockClass</td><td>Class</td><td>Lock Class</td><td>Class of object whose biased lock was revoked</td></tr>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td></td></tr>
+<tr><td>previousOwner</td><td>Thread</td><td>Previous Owner</td><td>Thread owning the bias before revocation</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>BiasedLockSelfRevocation</td><td>[Java Virtual Machine, Runtime]</td><td>Biased Lock Self Revocation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>lockClass</td><td>Class</td><td>Lock Class</td><td>Class of object whose biased lock was revoked</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>BiasedLockClassRevocation</td><td>[Java Virtual Machine, Runtime]</td><td>Biased Lock Class Revocation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>revokedClass</td><td>Class</td><td>Revoked Class</td><td>Class whose biased locks were revoked</td></tr>
+<tr><td>disableBiasing</td><td>boolean</td><td>Disable Further Biasing</td><td>Whether further biasing for instances of this class will be allowed</td></tr>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ReservedStackActivation</td><td>[Java Virtual Machine, Runtime]</td><td>Reserved Stack Activation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>method</td><td>Method</td><td>Java Method</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ClassLoad</td><td>[Java Virtual Machine, Class Loading]</td><td>Class Load</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>loadedClass</td><td>Class</td><td>Loaded Class</td></tr>
+<tr><td>definingClassLoader</td><td>ClassLoader</td><td>Defining Class Loader</td></tr>
+<tr><td>initiatingClassLoader</td><td>ClassLoader</td><td>Initiating Class Loader</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ClassDefine</td><td>[Java Virtual Machine, Class Loading]</td><td>Class Define</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>definedClass</td><td>Class</td><td>Defined Class</td></tr>
+<tr><td>definingClassLoader</td><td>ClassLoader</td><td>Defining Class Loader</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ClassRedefinition</td><td>[Java Virtual Machine, Class Loading]</td><td>Class Redefinition</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>redefinedClass</td><td>Class</td><td>Redefined Class</td><td></td></tr>
+<tr><td>classModificationCount</td><td>int</td><td>Class Modification Count</td><td>The number of times the class has changed</td></tr>
+<tr><td>redefinitionId</td><td>ulong</td><td>Class Redefinition Id</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>RedefineClasses</td><td>[Java Virtual Machine, Class Loading]</td><td>Redefine Classes</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>classCount</td><td>int</td><td>Class Count</td></tr>
+<tr><td>redefinitionId</td><td>ulong</td><td>Class Redefinition Id</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>RetransformClasses</td><td>[Java Virtual Machine, Class Loading]</td><td>Retransform Classes</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>classCount</td><td>int</td><td>Class Count</td></tr>
+<tr><td>redefinitionId</td><td>ulong</td><td>Class Redefinition Id</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ClassUnload</td><td>[Java Virtual Machine, Class Loading]</td><td>Class Unload</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>unloadedClass</td><td>Class</td><td>Unloaded Class</td></tr>
+<tr><td>definingClassLoader</td><td>ClassLoader</td><td>Defining Class Loader</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>IntFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>Int Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>int</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>int</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>UnsignedIntFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>Unsigned Int Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>uint</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>uint</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>LongFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>Long Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>long</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>long</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>UnsignedLongFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>Unsigned Long Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>ulong</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>ulong</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>DoubleFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>Double Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>double</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>double</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>BooleanFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>Boolean Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>boolean</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>boolean</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>StringFlagChanged</td><td>[Java Virtual Machine, Flag]</td><td>String Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>oldValue</td><td>string</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>string</td><td>New Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCHeapSummary</td><td>[Java Virtual Machine, GC, Heap]</td><td>Heap Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td></td></tr>
+<tr><td>when</td><td>GCWhen</td><td></td><td>When</td><td></td></tr>
+<tr><td>heapSpace</td><td>VirtualSpace</td><td></td><td>Heap Space</td><td></td></tr>
+<tr><td>heapUsed</td><td>ulong</td><td>bytes</td><td>Heap Used</td><td>Bytes allocated by objects in the heap</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>MetaspaceSummary</td><td>[Java Virtual Machine, GC, Heap]</td><td>Metaspace Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td></tr>
+<tr><td>when</td><td>GCWhen</td><td></td><td>When</td></tr>
+<tr><td>gcThreshold</td><td>ulong</td><td>bytes</td><td>GC Threshold</td></tr>
+<tr><td>metaspace</td><td>MetaspaceSizes</td><td></td><td>Total</td></tr>
+<tr><td>dataSpace</td><td>MetaspaceSizes</td><td></td><td>Data</td></tr>
+<tr><td>classSpace</td><td>MetaspaceSizes</td><td></td><td>Class</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>MetaspaceGCThreshold</td><td>[Java Virtual Machine, GC, Metaspace]</td><td>Metaspace GC Threshold</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>oldValue</td><td>ulong</td><td>bytes</td><td>Old Value</td></tr>
+<tr><td>newValue</td><td>ulong</td><td>bytes</td><td>New Value</td></tr>
+<tr><td>updater</td><td>GCThresholdUpdater</td><td></td><td>Updater</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>MetaspaceAllocationFailure</td><td>[Java Virtual Machine, GC, Metaspace]</td><td>Metaspace Allocation Failure</td><td>false</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>classLoader</td><td>ClassLoader</td><td></td><td>Class Loader</td></tr>
+<tr><td>hiddenClassLoader</td><td>boolean</td><td></td><td>Hidden Class Loader</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
+<tr><td>metadataType</td><td>MetadataType</td><td></td><td>Metadata Type</td></tr>
+<tr><td>metaspaceObjectType</td><td>MetaspaceObjectType</td><td></td><td>Metaspace Object Type</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>MetaspaceOOM</td><td>[Java Virtual Machine, GC, Metaspace]</td><td>Metaspace Out of Memory</td><td>false</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>classLoader</td><td>ClassLoader</td><td></td><td>Class Loader</td></tr>
+<tr><td>hiddenClassLoader</td><td>boolean</td><td></td><td>Hidden Class Loader</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
+<tr><td>metadataType</td><td>MetadataType</td><td></td><td>Metadata Type</td></tr>
+<tr><td>metaspaceObjectType</td><td>MetaspaceObjectType</td><td></td><td>Metaspace Object Type</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>MetaspaceChunkFreeListSummary</td><td>[Java Virtual Machine, GC, Metaspace]</td><td>Metaspace Chunk Free List Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td></tr>
+<tr><td>when</td><td>GCWhen</td><td></td><td>When</td></tr>
+<tr><td>metadataType</td><td>MetadataType</td><td></td><td>Metadata Type</td></tr>
+<tr><td>specializedChunks</td><td>ulong</td><td></td><td>Specialized Chunks</td></tr>
+<tr><td>specializedChunksTotalSize</td><td>ulong</td><td>bytes</td><td>Specialized Chunks Total Size</td></tr>
+<tr><td>smallChunks</td><td>ulong</td><td></td><td>Small Chunks</td></tr>
+<tr><td>smallChunksTotalSize</td><td>ulong</td><td>bytes</td><td>Small Chunks Total Size</td></tr>
+<tr><td>mediumChunks</td><td>ulong</td><td></td><td>Medium Chunks</td></tr>
+<tr><td>mediumChunksTotalSize</td><td>ulong</td><td>bytes</td><td>Medium Chunks Total Size</td></tr>
+<tr><td>humongousChunks</td><td>ulong</td><td></td><td>Humongous Chunks</td></tr>
+<tr><td>humongousChunksTotalSize</td><td>ulong</td><td>bytes</td><td>Humongous Chunks Total Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>PSHeapSummary</td><td>[Java Virtual Machine, GC, Heap]</td><td>Parallel Scavenge Heap Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>when</td><td>GCWhen</td><td>When</td></tr>
+<tr><td>oldSpace</td><td>VirtualSpace</td><td>Old Space</td></tr>
+<tr><td>oldObjectSpace</td><td>ObjectSpace</td><td>Old Object Space</td></tr>
+<tr><td>youngSpace</td><td>VirtualSpace</td><td>Young Space</td></tr>
+<tr><td>edenSpace</td><td>ObjectSpace</td><td>Eden Space</td></tr>
+<tr><td>fromSpace</td><td>ObjectSpace</td><td>From Space</td></tr>
+<tr><td>toSpace</td><td>ObjectSpace</td><td>To Space</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1HeapSummary</td><td>[Java Virtual Machine, GC, Heap]</td><td>G1 Heap Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td></tr>
+<tr><td>when</td><td>GCWhen</td><td></td><td>When</td></tr>
+<tr><td>edenUsedSize</td><td>ulong</td><td>bytes</td><td>Eden Used Size</td></tr>
+<tr><td>edenTotalSize</td><td>ulong</td><td>bytes</td><td>Eden Total Size</td></tr>
+<tr><td>survivorUsedSize</td><td>ulong</td><td>bytes</td><td>Survivor Used Size</td></tr>
+<tr><td>numberOfRegions</td><td>uint</td><td></td><td>Number of Regions</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GarbageCollection</td><td>[Java Virtual Machine, GC, Collector]</td><td>Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td><td></td></tr>
+<tr><td>name</td><td>GCName</td><td>Name</td><td>The name of the Garbage Collector</td></tr>
+<tr><td>cause</td><td>GCCause</td><td>Cause</td><td>The reason for triggering this Garbage Collection</td></tr>
+<tr><td>sumOfPauses</td><td>Tickspan</td><td>Sum of Pauses</td><td>Sum of all the times in which Java execution was paused during the garbage collection</td></tr>
+<tr><td>longestPause</td><td>Tickspan</td><td>Longest Pause</td><td>Longest individual pause during the garbage collection</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ParallelOldGarbageCollection</td><td>[Java Virtual Machine, GC, Collector]</td><td>Parallel Old Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td></td></tr>
+<tr><td>densePrefix</td><td>ulong</td><td>address</td><td>Dense Prefix</td><td>The address of the dense prefix, used when compacting</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>YoungGarbageCollection</td><td>[Java Virtual Machine, GC, Collector]</td><td>Young Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>tenuringThreshold</td><td>uint</td><td>Tenuring Threshold</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>OldGarbageCollection</td><td>[Java Virtual Machine, GC, Collector]</td><td>Old Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1GarbageCollection</td><td>[Java Virtual Machine, GC, Collector]</td><td>G1 Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>type</td><td>G1YCType</td><td>Type</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1MMU</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 MMU Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td></td></tr>
+<tr><td>timeSlice</td><td>long</td><td>millis</td><td>Time Slice</td><td>Time slice used to calculate MMU</td></tr>
+<tr><td>gcTime</td><td>long</td><td>millis</td><td>GC Time</td><td>Time stopped because of GC during last time slice</td></tr>
+<tr><td>pauseTarget</td><td>long</td><td>millis</td><td>Pause Target</td><td>Max time allowed to be spent on GC during last time slice</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>EvacuationInformation</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Evacuation Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td></td></tr>
+<tr><td>cSetRegions</td><td>uint</td><td></td><td>Collection Set Regions</td><td></td></tr>
+<tr><td>cSetUsedBefore</td><td>ulong</td><td>bytes</td><td>Collection Set Before</td><td>Memory usage before GC in the collection set regions</td></tr>
+<tr><td>cSetUsedAfter</td><td>ulong</td><td>bytes</td><td>Collection Set After</td><td>Memory usage after GC in the collection set regions</td></tr>
+<tr><td>allocationRegions</td><td>uint</td><td></td><td>Allocation Regions</td><td>Regions chosen as allocation regions during evacuation (includes survivors and old space regions)</td></tr>
+<tr><td>allocationRegionsUsedBefore</td><td>ulong</td><td>bytes</td><td>Allocation Regions Before</td><td>Memory usage before GC in allocation regions</td></tr>
+<tr><td>allocationRegionsUsedAfter</td><td>ulong</td><td>bytes</td><td>Allocation Regions After</td><td>Memory usage after GC in allocation regions</td></tr>
+<tr><td>bytesCopied</td><td>ulong</td><td>bytes</td><td>Bytes Copied</td><td></td></tr>
+<tr><td>regionsFreed</td><td>uint</td><td></td><td>Regions Freed</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCReferenceStatistics</td><td>[Java Virtual Machine, GC, Reference]</td><td>GC Reference Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>type</td><td>ReferenceType</td><td>Type</td></tr>
+<tr><td>count</td><td>ulong</td><td>Total Count</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ObjectCountAfterGC</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Object Count after GC</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td></tr>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td></tr>
+<tr><td>count</td><td>long</td><td></td><td>Count</td></tr>
+<tr><td>totalSize</td><td>ulong</td><td>bytes</td><td>Total Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1EvacuationYoungStatistics</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 Evacuation Statistics for Young</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>statistics</td><td>G1EvacuationStatistics</td><td>Evacuation Statistics</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1EvacuationOldStatistics</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 Evacuation Memory Statistics for Old</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>statistics</td><td>G1EvacuationStatistics</td><td>Evacuation Statistics</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1BasicIHOP</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 Basic IHOP Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td></td></tr>
+<tr><td>threshold</td><td>ulong</td><td>bytes</td><td>Current IHOP Threshold</td><td>Current IHOP threshold</td></tr>
+<tr><td>thresholdPercentage</td><td>float</td><td>percentage</td><td>Current IHOP Threshold</td><td>Current IHOP threshold in percent of old generation</td></tr>
+<tr><td>targetOccupancy</td><td>ulong</td><td>bytes</td><td>Target Occupancy</td><td>Target old generation occupancy to reach at the start of mixed GC</td></tr>
+<tr><td>currentOccupancy</td><td>ulong</td><td>bytes</td><td>Current Occupancy</td><td>Current old generation occupancy</td></tr>
+<tr><td>recentMutatorAllocationSize</td><td>ulong</td><td>bytes</td><td>Recent Mutator Allocation Size</td><td>Mutator allocation during mutator operation in the most recent interval</td></tr>
+<tr><td>recentMutatorDuration</td><td>long</td><td>millis</td><td>Recent Mutator Duration</td><td>Time the mutator ran in the most recent interval</td></tr>
+<tr><td>recentAllocationRate</td><td>double</td><td>bytes-per-second</td><td>Recent Allocation Rate</td><td>Allocation rate of the mutator in the most recent interval in bytes/second</td></tr>
+<tr><td>lastMarkingDuration</td><td>long</td><td>millis</td><td>Last Marking Duration</td><td>Last time from the end of the last concurrent start to the first mixed GC</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1AdaptiveIHOP</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 Adaptive IHOP Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td></td></tr>
+<tr><td>threshold</td><td>ulong</td><td>bytes</td><td>Threshold</td><td>Current IHOP Threshold</td></tr>
+<tr><td>thresholdPercentage</td><td>float</td><td>percentage</td><td>Threshold</td><td>Current IHOP threshold in percent of the internal target occupancy</td></tr>
+<tr><td>ihopTargetOccupancy</td><td>ulong</td><td>bytes</td><td>IHOP Target Occupancy</td><td>Internal target old generation occupancy to reach at the start of mixed GC</td></tr>
+<tr><td>currentOccupancy</td><td>ulong</td><td>bytes</td><td>Current Occupancy</td><td>Current old generation occupancy</td></tr>
+<tr><td>additionalBufferSize</td><td>ulong</td><td>bytes</td><td>Additional Buffer</td><td>Additional buffer size</td></tr>
+<tr><td>predictedAllocationRate</td><td>double</td><td>bytes-per-second</td><td>Predicted Allocation Rate</td><td>Current predicted allocation rate for the mutator in bytes/second</td></tr>
+<tr><td>predictedMarkingDuration</td><td>long</td><td>millis</td><td>Predicted Marking Duration</td><td>Current predicted time from the end of the last concurrent start to the first mixed GC</td></tr>
+<tr><td>predictionActive</td><td>boolean</td><td></td><td>Prediction Active</td><td>Indicates whether the adaptive IHOP prediction is active</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>PromoteObjectInNewPLAB</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Promotion in new PLAB</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td>Identifier signifying GC during which the object was promoted</td></tr>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td><td>Class of promoted object</td></tr>
+<tr><td>objectSize</td><td>ulong</td><td>bytes</td><td>Object Size</td><td>Size of promoted object</td></tr>
+<tr><td>tenuringAge</td><td>uint</td><td></td><td>Object Tenuring Age</td><td>Tenuring age of a surviving object before being copied. The tenuring age of an object is a value between 0-15 and is incremented each scavange the object survives. Newly allocated objects have tenuring age 0.</td></tr>
+<tr><td>tenured</td><td>boolean</td><td></td><td>Tenured</td><td>True if object was promoted to Old space, otherwise the object was aged and copied to a Survivor space</td></tr>
+<tr><td>plabSize</td><td>ulong</td><td>bytes</td><td>PLAB Size</td><td>Size of the allocated PLAB to which the object was copied</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>PromoteObjectOutsidePLAB</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Promotion outside PLAB</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td><td>Identifier signifying GC during which the object was promoted</td></tr>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td><td>Class of promoted object</td></tr>
+<tr><td>objectSize</td><td>ulong</td><td>bytes</td><td>Object Size</td><td>Size of promoted object</td></tr>
+<tr><td>tenuringAge</td><td>uint</td><td></td><td>Object Tenuring Age</td><td>Tenuring age of a surviving object before being copied. The tenuring age of an object is a value between 0-15 and is incremented each scavange the object survives. Newly allocated objects have tenuring age 0.</td></tr>
+<tr><td>tenured</td><td>boolean</td><td></td><td>Tenured</td><td>True if object was promoted to Old space, otherwise the object was aged and copied to a Survivor space</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>PromotionFailed</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Promotion Failed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>promotionFailed</td><td>CopyFailed</td><td>Promotion Failed Data</td></tr>
+<tr><td>thread</td><td>Thread</td><td>Running thread</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>EvacuationFailed</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Evacuation Failed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>evacuationFailed</td><td>CopyFailed</td><td>Evacuation Failed Data</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ConcurrentModeFailure</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Concurrent Mode Failure</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhasePause</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Pause</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhasePauseLevel1</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Pause Level 1</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhasePauseLevel2</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Pause Level 2</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhasePauseLevel3</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Pause Level 3</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhasePauseLevel4</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Pause Level 4</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhaseConcurrent</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Concurrent</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhaseConcurrentLevel1</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Concurrent Level 1</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhaseParallel</td><td>[Java Virtual Machine, GC, Phases]</td><td>GC Phase Parallel</td><td>true</td><td>true</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>gcWorkerId</td><td>uint</td><td>GC Worker Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>AllocationRequiringGC</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Allocation Requiring GC</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>Pending GC Identifier</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Allocation Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>TenuringDistribution</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Tenuring Distribution</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td></tr>
+<tr><td>age</td><td>uint</td><td></td><td>Age</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1HeapRegionTypeChange</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 Heap Region Type Change</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>index</td><td>uint</td><td></td><td>Index</td></tr>
+<tr><td>from</td><td>G1HeapRegionType</td><td></td><td>From</td></tr>
+<tr><td>to</td><td>G1HeapRegionType</td><td></td><td>To</td></tr>
+<tr><td>start</td><td>ulong</td><td>address</td><td>Start</td></tr>
+<tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>Compilation</td><td>[Java Virtual Machine, Compiler]</td><td>Compilation</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>compileId</td><td>uint</td><td></td><td>Compilation Identifier</td></tr>
+<tr><td>compiler</td><td>CompilerType</td><td></td><td>Compiler</td></tr>
+<tr><td>method</td><td>Method</td><td></td><td>Method</td></tr>
+<tr><td>compileLevel</td><td>ushort</td><td></td><td>Compilation Level</td></tr>
+<tr><td>succeded</td><td>boolean</td><td></td><td>Succeeded</td></tr>
+<tr><td>isOsr</td><td>boolean</td><td></td><td>On Stack Replacement</td></tr>
+<tr><td>codeSize</td><td>ulong</td><td>bytes</td><td>Compiled Code Size</td></tr>
+<tr><td>inlinedBytes</td><td>ulong</td><td>bytes</td><td>Inlined Code Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CompilerPhase</td><td>[Java Virtual Machine, Compiler]</td><td>Compiler Phase</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>phase</td><td>CompilerPhaseType</td><td>Compile Phase</td></tr>
+<tr><td>compileId</td><td>uint</td><td>Compilation Identifier</td></tr>
+<tr><td>phaseLevel</td><td>ushort</td><td>Phase Level</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CompilationFailure</td><td>[Java Virtual Machine, Compiler]</td><td>Compilation Failure</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>failureMessage</td><td>string</td><td>Failure Message</td></tr>
+<tr><td>compileId</td><td>uint</td><td>Compilation Identifier</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CompilerInlining</td><td>[Java Virtual Machine, Compiler, Optimization]</td><td>Method Inlining</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>compileId</td><td>uint</td><td>Compilation Identifier</td></tr>
+<tr><td>caller</td><td>Method</td><td>Caller Method</td></tr>
+<tr><td>callee</td><td>CalleeMethod</td><td>Callee Method</td></tr>
+<tr><td>succeeded</td><td>boolean</td><td>Succeeded</td></tr>
+<tr><td>message</td><td>string</td><td>Message</td></tr>
+<tr><td>bci</td><td>int</td><td>Bytecode Index</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SweepCodeCache</td><td>[Java Virtual Machine, Code Sweeper]</td><td>Sweep Code Cache</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>sweepId</td><td>int</td><td>Sweep Identifier</td></tr>
+<tr><td>sweptCount</td><td>uint</td><td>Methods Swept</td></tr>
+<tr><td>flushedCount</td><td>uint</td><td>Methods Flushed</td></tr>
+<tr><td>zombifiedCount</td><td>uint</td><td>Methods Zombified</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CodeCacheFull</td><td>[Java Virtual Machine, Code Cache]</td><td>Code Cache Full</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>codeBlobType</td><td>CodeBlobType</td><td></td><td>Code Heap</td></tr>
+<tr><td>startAddress</td><td>ulong</td><td>address</td><td>Start Address</td></tr>
+<tr><td>commitedTopAddress</td><td>ulong</td><td>address</td><td>Commited Top</td></tr>
+<tr><td>reservedTopAddress</td><td>ulong</td><td>address</td><td>Reserved Top</td></tr>
+<tr><td>entryCount</td><td>int</td><td></td><td>Entries</td></tr>
+<tr><td>methodCount</td><td>int</td><td></td><td>Methods</td></tr>
+<tr><td>adaptorCount</td><td>int</td><td></td><td>Adaptors</td></tr>
+<tr><td>unallocatedCapacity</td><td>ulong</td><td>bytes</td><td>Unallocated</td></tr>
+<tr><td>fullCount</td><td>int</td><td></td><td>Full Count</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>Deoptimization</td><td>[Java Virtual Machine, Compiler]</td><td>Deoptimization</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>compileId</td><td>uint</td><td>Compilation Identifier</td></tr>
+<tr><td>compiler</td><td>CompilerType</td><td>Compiler</td></tr>
+<tr><td>method</td><td>Method</td><td>Method</td></tr>
+<tr><td>lineNumber</td><td>int</td><td>Line Number</td></tr>
+<tr><td>bci</td><td>int</td><td>Bytecode Index</td></tr>
+<tr><td>instruction</td><td>Bytecode</td><td>Instruction</td></tr>
+<tr><td>reason</td><td>DeoptimizationReason</td><td>Reason</td></tr>
+<tr><td>action</td><td>DeoptimizationAction</td><td>Action</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SafepointBegin</td><td>[Java Virtual Machine, Runtime, Safepoint]</td><td>Safepoint Begin</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td></td></tr>
+<tr><td>totalThreadCount</td><td>int</td><td>Total Threads</td><td>The total number of threads at the start of safe point</td></tr>
+<tr><td>jniCriticalThreadCount</td><td>int</td><td>JNI Critical Threads</td><td>The number of threads in JNI critical sections</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SafepointStateSynchronization</td><td>[Java Virtual Machine, Runtime, Safepoint]</td><td>Safepoint State Synchronization</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td></td></tr>
+<tr><td>initialThreadCount</td><td>int</td><td>Initial Threads</td><td>The number of threads running at the beginning of state check</td></tr>
+<tr><td>runningThreadCount</td><td>int</td><td>Running Threads</td><td>The number of threads still running</td></tr>
+<tr><td>iterations</td><td>int</td><td>Iterations</td><td>Number of state check iterations</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SafepointCleanup</td><td>[Java Virtual Machine, Runtime, Safepoint]</td><td>Safepoint Cleanup</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SafepointCleanupTask</td><td>[Java Virtual Machine, Runtime, Safepoint]</td><td>Safepoint Cleanup Task</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td></td></tr>
+<tr><td>name</td><td>string</td><td>Task Name</td><td>The task name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SafepointEnd</td><td>[Java Virtual Machine, Runtime, Safepoint]</td><td>Safepoint End</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ExecuteVMOperation</td><td>[Java Virtual Machine, Runtime]</td><td>VM Operation</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>operation</td><td>VMOperationType</td><td>Operation</td><td></td></tr>
+<tr><td>safepoint</td><td>boolean</td><td>At Safepoint</td><td>If the operation occured at a safepoint</td></tr>
+<tr><td>blocking</td><td>boolean</td><td>Caller Blocked</td><td>If the calling thread was blocked until the operation was complete</td></tr>
+<tr><td>caller</td><td>Thread</td><td>Caller</td><td>Thread requesting operation. If non-blocking, will be set to 0 indicating thread is unknown</td></tr>
+<tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td>The safepoint (if any) under which this operation was completed</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>Shutdown</td><td>[Java Virtual Machine, Runtime]</td><td>JVM Shutdown</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>reason</td><td>string</td><td>Reason</td><td>Reason for JVM shutdown</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ObjectAllocationInNewTLAB</td><td>[Java Application]</td><td>Allocation in new TLAB</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td><td>Class of allocated object</td></tr>
+<tr><td>allocationSize</td><td>ulong</td><td>bytes</td><td>Allocation Size</td><td></td></tr>
+<tr><td>tlabSize</td><td>ulong</td><td>bytes</td><td>TLAB Size</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ObjectAllocationOutsideTLAB</td><td>[Java Application]</td><td>Allocation outside TLAB</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td><td>Class of allocated object</td></tr>
+<tr><td>allocationSize</td><td>ulong</td><td>bytes</td><td>Allocation Size</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ObjectAllocationSample</td><td>[Java Application]</td><td>Object Allocation Sample</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td><td>Class of allocated object</td></tr>
+<tr><td>weight</td><td>long</td><td>bytes</td><td>Sample Weight</td><td>The relative weight of the sample. Aggregating the weights for a large number of samples, for a particular class, thread or stack trace, gives a statistically accurate representation of the allocation pressure</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>OldObjectSample</td><td>[Java Virtual Machine, Profiling]</td><td>Old Object Sample</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>allocationTime</td><td>Ticks</td><td></td><td>Allocation Time</td><td></td></tr>
+<tr><td>objectAge</td><td>Tickspan</td><td></td><td>Object Age</td><td></td></tr>
+<tr><td>lastKnownHeapUsage</td><td>ulong</td><td>bytes</td><td>Last Known Heap Usage</td><td></td></tr>
+<tr><td>object</td><td>OldObject</td><td></td><td>Object</td><td></td></tr>
+<tr><td>arrayElements</td><td>int</td><td></td><td>Array Elements</td><td>If the object is an array, the number of elements, or -1 if it is not an array</td></tr>
+<tr><td>root</td><td>OldObjectGcRoot</td><td></td><td>GC Root</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>DumpReason</td><td>[Flight Recorder]</td><td>Recording Reason</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>reason</td><td>string</td><td>Reason</td><td>Reason for writing recording data to disk</td></tr>
+<tr><td>recordingId</td><td>int</td><td>Recording Id</td><td>Id of the recording that triggered the dump, or -1 if it was not related to a recording</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>DataLoss</td><td>[Flight Recorder]</td><td>Data Loss</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>amount</td><td>ulong</td><td>bytes</td><td>Amount</td><td>Amount lost data</td></tr>
+<tr><td>total</td><td>ulong</td><td>bytes</td><td>Total</td><td>Total lost amount for thread</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>JVMInformation</td><td>[Java Virtual Machine]</td><td>JVM Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>jvmName</td><td>string</td><td></td><td>JVM Name</td></tr>
+<tr><td>jvmVersion</td><td>string</td><td></td><td>JVM Version</td></tr>
+<tr><td>jvmArguments</td><td>string</td><td></td><td>JVM Command Line Arguments</td></tr>
+<tr><td>jvmFlags</td><td>string</td><td></td><td>JVM Settings File Arguments</td></tr>
+<tr><td>javaArguments</td><td>string</td><td></td><td>Java Application Arguments</td></tr>
+<tr><td>jvmStartTime</td><td>long</td><td>epochmillis</td><td>JVM Start Time</td></tr>
+<tr><td>pid</td><td>long</td><td></td><td>Process Identifier</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>OSInformation</td><td>[Operating System]</td><td>OS Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>osVersion</td><td>string</td><td>OS Version</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>VirtualizationInformation</td><td>[Operating System]</td><td>Virtualization Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>InitialSystemProperty</td><td>[Java Virtual Machine]</td><td>Initial System Property</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>key</td><td>string</td><td>Key</td></tr>
+<tr><td>value</td><td>string</td><td>Value</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>InitialEnvironmentVariable</td><td>[Operating System]</td><td>Initial Environment Variable</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>key</td><td>string</td><td>Key</td></tr>
+<tr><td>value</td><td>string</td><td>Value</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SystemProcess</td><td>[Operating System]</td><td>System Process</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>pid</td><td>string</td><td>Process Identifier</td></tr>
+<tr><td>commandLine</td><td>string</td><td>Command Line</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CPUInformation</td><td>[Operating System, Processor]</td><td>CPU Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>cpu</td><td>string</td><td>Type</td></tr>
+<tr><td>description</td><td>string</td><td>Description</td></tr>
+<tr><td>sockets</td><td>uint</td><td>Sockets</td></tr>
+<tr><td>cores</td><td>uint</td><td>Cores</td></tr>
+<tr><td>hwThreads</td><td>uint</td><td>Hardware Threads</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CPUTimeStampCounter</td><td>[Operating System, Processor]</td><td>CPU Time Stamp Counter</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>fastTimeEnabled</td><td>boolean</td><td></td><td>Fast Time</td></tr>
+<tr><td>fastTimeAutoEnabled</td><td>boolean</td><td></td><td>Trusted Platform</td></tr>
+<tr><td>osFrequency</td><td>long</td><td>hertz</td><td>OS Frequency</td></tr>
+<tr><td>fastTimeFrequency</td><td>long</td><td>hertz</td><td>Fast Time Frequency</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CPULoad</td><td>[Operating System, Processor]</td><td>CPU Load</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>jvmUser</td><td>float</td><td>percentage</td><td>JVM User</td></tr>
+<tr><td>jvmSystem</td><td>float</td><td>percentage</td><td>JVM System</td></tr>
+<tr><td>machineTotal</td><td>float</td><td>percentage</td><td>Machine Total</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadCPULoad</td><td>[Operating System, Processor]</td><td>Thread CPU Load</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>user</td><td>float</td><td>percentage</td><td>User Mode CPU Load</td><td>User mode thread CPU load</td></tr>
+<tr><td>system</td><td>float</td><td>percentage</td><td>System Mode CPU Load</td><td>System mode thread CPU load</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadContextSwitchRate</td><td>[Operating System, Processor]</td><td>Thread Context Switch Rate</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>switchRate</td><td>float</td><td>hertz</td><td>Switch Rate</td><td>Number of context switches per second</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>NetworkUtilization</td><td>[Operating System, Network]</td><td>Network Utilization</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>networkInterface</td><td>NetworkInterfaceName</td><td></td><td>Network Interface</td><td>Network Interface Name</td></tr>
+<tr><td>readRate</td><td>long</td><td>bits-per-second</td><td>Read Rate</td><td>Number of incoming bits per second</td></tr>
+<tr><td>writeRate</td><td>long</td><td>bits-per-second</td><td>Write Rate</td><td>Number of outgoing bits per second</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>JavaThreadStatistics</td><td>[Java Application, Statistics]</td><td>Java Thread Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>activeCount</td><td>long</td><td>Active Threads</td><td>Number of live active threads including both daemon and non-daemon threads</td></tr>
+<tr><td>daemonCount</td><td>long</td><td>Daemon Threads</td><td>Number of live daemon threads</td></tr>
+<tr><td>accumulatedCount</td><td>long</td><td>Accumulated Threads</td><td>Number of threads created and also started since JVM start</td></tr>
+<tr><td>peakCount</td><td>long</td><td>Peak Threads</td><td>Peak live thread count since JVM start or when peak count was reset</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ClassLoadingStatistics</td><td>[Java Application, Statistics]</td><td>Class Loading Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>loadedClassCount</td><td>long</td><td>Loaded Class Count</td><td>Number of classes loaded since JVM start</td></tr>
+<tr><td>unloadedClassCount</td><td>long</td><td>Unloaded Class Count</td><td>Number of classes unloaded since JVM start</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ClassLoaderStatistics</td><td>[Java Application, Statistics]</td><td>Class Loader Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>classLoader</td><td>ClassLoader</td><td></td><td>Class Loader</td><td></td></tr>
+<tr><td>parentClassLoader</td><td>ClassLoader</td><td></td><td>Parent Class Loader</td><td></td></tr>
+<tr><td>classLoaderData</td><td>ulong</td><td>address</td><td>ClassLoaderData Pointer</td><td>Pointer to the ClassLoaderData structure in the JVM</td></tr>
+<tr><td>classCount</td><td>long</td><td></td><td>Classes</td><td>Number of loaded classes</td></tr>
+<tr><td>chunkSize</td><td>ulong</td><td>bytes</td><td>Total Chunk Size</td><td>Total size of all allocated metaspace chunks (each chunk has several blocks)</td></tr>
+<tr><td>blockSize</td><td>ulong</td><td>bytes</td><td>Total Block Size</td><td>Total size of all allocated metaspace blocks (each chunk has several blocks)</td></tr>
+<tr><td>hiddenClassCount</td><td>long</td><td></td><td>Hidden Classes</td><td>Number of hidden classes</td></tr>
+<tr><td>hiddenChunkSize</td><td>ulong</td><td>bytes</td><td>Total Hidden Classes Chunk Size</td><td>Total size of all allocated metaspace chunks for hidden classes (each chunk has several blocks)</td></tr>
+<tr><td>hiddenBlockSize</td><td>ulong</td><td>bytes</td><td>Total Hidden Classes Block Size</td><td>Total size of all allocated metaspace blocks for hidden classes (each chunk has several blocks)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>SymbolTableStatistics</td><td>[Java Virtual Machine, Runtime, Tables]</td><td>Symbol Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>bucketCount</td><td>ulong</td><td></td><td>Bucket Count</td><td>Number of buckets</td></tr>
+<tr><td>entryCount</td><td>ulong</td><td></td><td>Entry Count</td><td>Number of all entries</td></tr>
+<tr><td>totalFootprint</td><td>ulong</td><td>bytes</td><td>Total Footprint</td><td>Total memory footprint (the table itself plus all of the entries)</td></tr>
+<tr><td>bucketCountMaximum</td><td>ulong</td><td></td><td>Maximum Bucket Count</td><td>The maximum bucket length (entries in a single bucket)</td></tr>
+<tr><td>bucketCountAverage</td><td>float</td><td></td><td>Average Bucket Count</td><td>The average bucket length</td></tr>
+<tr><td>bucketCountVariance</td><td>float</td><td></td><td>Bucket Count Variance</td><td>How far bucket lengths are spread out from their average value</td></tr>
+<tr><td>bucketCountStandardDeviation</td><td>float</td><td></td><td>Bucket Count Standard Deviation</td><td>How far bucket lengths are spread out from their mean (expected) value</td></tr>
+<tr><td>insertionRate</td><td>float</td><td></td><td>Insertion Rate</td><td>How many items were added since last event (per second)</td></tr>
+<tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>StringTableStatistics</td><td>[Java Virtual Machine, Runtime, Tables]</td><td>String Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>bucketCount</td><td>ulong</td><td></td><td>Bucket Count</td><td>Number of buckets</td></tr>
+<tr><td>entryCount</td><td>ulong</td><td></td><td>Entry Count</td><td>Number of all entries</td></tr>
+<tr><td>totalFootprint</td><td>ulong</td><td>bytes</td><td>Total Footprint</td><td>Total memory footprint (the table itself plus all of the entries)</td></tr>
+<tr><td>bucketCountMaximum</td><td>ulong</td><td></td><td>Maximum Bucket Count</td><td>The maximum bucket length (entries in a single bucket)</td></tr>
+<tr><td>bucketCountAverage</td><td>float</td><td></td><td>Average Bucket Count</td><td>The average bucket length</td></tr>
+<tr><td>bucketCountVariance</td><td>float</td><td></td><td>Bucket Count Variance</td><td>How far bucket lengths are spread out from their average value</td></tr>
+<tr><td>bucketCountStandardDeviation</td><td>float</td><td></td><td>Bucket Count Standard Deviation</td><td>How far bucket lengths are spread out from their mean (expected) value</td></tr>
+<tr><td>insertionRate</td><td>float</td><td></td><td>Insertion Rate</td><td>How many items were added since last event (per second)</td></tr>
+<tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>PlaceholderTableStatistics</td><td>[Java Virtual Machine, Runtime, Tables]</td><td>Placeholder Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>bucketCount</td><td>ulong</td><td></td><td>Bucket Count</td><td>Number of buckets</td></tr>
+<tr><td>entryCount</td><td>ulong</td><td></td><td>Entry Count</td><td>Number of all entries</td></tr>
+<tr><td>totalFootprint</td><td>ulong</td><td>bytes</td><td>Total Footprint</td><td>Total memory footprint (the table itself plus all of the entries)</td></tr>
+<tr><td>bucketCountMaximum</td><td>ulong</td><td></td><td>Maximum Bucket Count</td><td>The maximum bucket length (entries in a single bucket)</td></tr>
+<tr><td>bucketCountAverage</td><td>float</td><td></td><td>Average Bucket Count</td><td>The average bucket length</td></tr>
+<tr><td>bucketCountVariance</td><td>float</td><td></td><td>Bucket Count Variance</td><td>How far bucket lengths are spread out from their average value</td></tr>
+<tr><td>bucketCountStandardDeviation</td><td>float</td><td></td><td>Bucket Count Standard Deviation</td><td>How far bucket lengths are spread out from their mean (expected) value</td></tr>
+<tr><td>insertionRate</td><td>float</td><td></td><td>Insertion Rate</td><td>How many items were added since last event (per second)</td></tr>
+<tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>LoaderConstraintsTableStatistics</td><td>[Java Virtual Machine, Runtime, Tables]</td><td>Loader Constraints Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>bucketCount</td><td>ulong</td><td></td><td>Bucket Count</td><td></td></tr>
+<tr><td>entryCount</td><td>ulong</td><td></td><td>Entry Count</td><td>Number of all entries</td></tr>
+<tr><td>totalFootprint</td><td>ulong</td><td>bytes</td><td>Total Footprint</td><td>Total memory footprint (the table itself plus all of the entries)</td></tr>
+<tr><td>bucketCountMaximum</td><td>ulong</td><td></td><td>Maximum Bucket Count</td><td>The maximum bucket length (entries in a single bucket)</td></tr>
+<tr><td>bucketCountAverage</td><td>float</td><td></td><td>Average Bucket Count</td><td>The average bucket length</td></tr>
+<tr><td>bucketCountVariance</td><td>float</td><td></td><td>Bucket Count Variance</td><td>How far bucket lengths are spread out from their average value</td></tr>
+<tr><td>bucketCountStandardDeviation</td><td>float</td><td></td><td>Bucket Count Standard Deviation</td><td>How far bucket lengths are spread out from their mean (expected) value</td></tr>
+<tr><td>insertionRate</td><td>float</td><td></td><td>Insertion Rate</td><td>How many items were added since last event (per second)</td></tr>
+<tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ProtectionDomainCacheTableStatistics</td><td>[Java Virtual Machine, Runtime, Tables]</td><td>Protection Domain Cache Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>bucketCount</td><td>ulong</td><td></td><td>Bucket Count</td><td>Number of buckets</td></tr>
+<tr><td>entryCount</td><td>ulong</td><td></td><td>Entry Count</td><td>Number of all entries</td></tr>
+<tr><td>totalFootprint</td><td>ulong</td><td>bytes</td><td>Total Footprint</td><td>Total memory footprint (the table itself plus all of the entries)</td></tr>
+<tr><td>bucketCountMaximum</td><td>ulong</td><td></td><td>Maximum Bucket Count</td><td>The maximum bucket length (entries in a single bucket)</td></tr>
+<tr><td>bucketCountAverage</td><td>float</td><td></td><td>Average Bucket Count</td><td>The average bucket length</td></tr>
+<tr><td>bucketCountVariance</td><td>float</td><td></td><td>Bucket Count Variance</td><td>How far bucket lengths are spread out from their average value</td></tr>
+<tr><td>bucketCountStandardDeviation</td><td>float</td><td></td><td>Bucket Count Standard Deviation</td><td>How far bucket lengths are spread out from their mean (expected) value</td></tr>
+<tr><td>insertionRate</td><td>float</td><td></td><td>Insertion Rate</td><td>How many items were added since last event (per second)</td></tr>
+<tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadAllocationStatistics</td><td>[Java Application, Statistics]</td><td>Thread Allocation Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>allocated</td><td>ulong</td><td>bytes</td><td>Allocated</td><td>Approximate number of bytes allocated since thread start</td></tr>
+<tr><td>thread</td><td>Thread</td><td></td><td>Thread</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>PhysicalMemory</td><td>[Operating System, Memory]</td><td>Physical Memory</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>totalSize</td><td>ulong</td><td>bytes</td><td>Total Size</td><td>Total amount of physical memory available to OS</td></tr>
+<tr><td>usedSize</td><td>ulong</td><td>bytes</td><td>Used Size</td><td>Total amount of physical memory in use</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ExecutionSample</td><td>[Java Virtual Machine, Profiling]</td><td>Method Profiling Sample</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>sampledThread</td><td>Thread</td><td>Thread</td></tr>
+<tr><td>stackTrace</td><td>StackTrace</td><td>Stack Trace</td></tr>
+<tr><td>state</td><td>ThreadState</td><td>Thread State</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>NativeMethodSample</td><td>[Java Virtual Machine, Profiling]</td><td>Method Profiling Sample Native</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>sampledThread</td><td>Thread</td><td>Thread</td></tr>
+<tr><td>stackTrace</td><td>StackTrace</td><td>Stack Trace</td></tr>
+<tr><td>state</td><td>ThreadState</td><td>Thread State</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ThreadDump</td><td>[Java Virtual Machine, Runtime]</td><td>Thread Dump</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>result</td><td>string</td><td>Thread Dump</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>NativeLibrary</td><td>[Java Virtual Machine, Runtime]</td><td>Native Library</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td></td><td>Name</td><td></td></tr>
+<tr><td>baseAddress</td><td>ulong</td><td>address</td><td>Base Address</td><td>Starting address of the module</td></tr>
+<tr><td>topAddress</td><td>ulong</td><td>address</td><td>Top Address</td><td>Ending address of the module</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ModuleRequire</td><td>[Java Virtual Machine, Runtime, Modules]</td><td>Module Require</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>source</td><td>Module</td><td>Source Module</td></tr>
+<tr><td>requiredModule</td><td>Module</td><td>Required Module</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ModuleExport</td><td>[Java Virtual Machine, Runtime, Modules]</td><td>Module Export</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>exportedPackage</td><td>Package</td><td>Exported Package</td><td></td></tr>
+<tr><td>targetModule</td><td>Module</td><td>Target Module</td><td>Module to which the package is qualifiedly exported. If null or N/A, the package is unqualifiedly exported</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CompilerStatistics</td><td>[Java Virtual Machine, Compiler]</td><td>Compiler Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>compileCount</td><td>int</td><td></td><td>Compiled Methods</td></tr>
+<tr><td>bailoutCount</td><td>int</td><td></td><td>Bailouts</td></tr>
+<tr><td>invalidatedCount</td><td>int</td><td></td><td>Invalidated Compilations</td></tr>
+<tr><td>osrCompileCount</td><td>int</td><td></td><td>OSR Compilations</td></tr>
+<tr><td>standardCompileCount</td><td>int</td><td></td><td>Standard Compilations</td></tr>
+<tr><td>osrBytesCompiled</td><td>ulong</td><td>bytes</td><td>OSR Bytes Compiled</td></tr>
+<tr><td>standardBytesCompiled</td><td>ulong</td><td>bytes</td><td>Standard Bytes Compiled</td></tr>
+<tr><td>nmethodsSize</td><td>ulong</td><td>bytes</td><td>Compilation Resulting Size</td></tr>
+<tr><td>nmethodCodeSize</td><td>ulong</td><td>bytes</td><td>Compilation Resulting Code Size</td></tr>
+<tr><td>peakTimeSpent</td><td>long</td><td>millis</td><td>Peak Time</td></tr>
+<tr><td>totalTimeSpent</td><td>long</td><td>millis</td><td>Total time</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CompilerConfiguration</td><td>[Java Virtual Machine, Compiler]</td><td>Compiler Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>threadCount</td><td>int</td><td>Thread Count</td></tr>
+<tr><td>tieredCompilation</td><td>boolean</td><td>Tiered Compilation</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CodeCacheStatistics</td><td>[Java Virtual Machine, Code Cache]</td><td>Code Cache Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>codeBlobType</td><td>CodeBlobType</td><td></td><td>Code Heap</td></tr>
+<tr><td>startAddress</td><td>ulong</td><td>address</td><td>Start Address</td></tr>
+<tr><td>reservedTopAddress</td><td>ulong</td><td>address</td><td>Reserved Top</td></tr>
+<tr><td>entryCount</td><td>int</td><td></td><td>Entries</td></tr>
+<tr><td>methodCount</td><td>int</td><td></td><td>Methods</td></tr>
+<tr><td>adaptorCount</td><td>int</td><td></td><td>Adaptors</td></tr>
+<tr><td>unallocatedCapacity</td><td>ulong</td><td>bytes</td><td>Unallocated</td></tr>
+<tr><td>fullCount</td><td>int</td><td></td><td>Full Count</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CodeCacheConfiguration</td><td>[Java Virtual Machine, Code Cache]</td><td>Code Cache Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>initialSize</td><td>ulong</td><td>bytes</td><td>Initial Size</td></tr>
+<tr><td>reservedSize</td><td>ulong</td><td>bytes</td><td>Reserved Size</td></tr>
+<tr><td>nonNMethodSize</td><td>ulong</td><td>bytes</td><td>Non-nmethod Size</td></tr>
+<tr><td>profiledSize</td><td>ulong</td><td>bytes</td><td>Profiled Size</td></tr>
+<tr><td>nonProfiledSize</td><td>ulong</td><td>bytes</td><td>Non-profiled Size</td></tr>
+<tr><td>expansionSize</td><td>ulong</td><td>bytes</td><td>Expansion size</td></tr>
+<tr><td>minBlockLength</td><td>ulong</td><td>bytes</td><td>Minimum Block Length</td></tr>
+<tr><td>startAddress</td><td>ulong</td><td>address</td><td>Start Address</td></tr>
+<tr><td>reservedTopAddress</td><td>ulong</td><td>address</td><td>Reserved Top</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CodeSweeperStatistics</td><td>[Java Virtual Machine, Code Sweeper]</td><td>Code Sweeper Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>sweepCount</td><td>int</td><td>Sweeps</td></tr>
+<tr><td>methodReclaimedCount</td><td>int</td><td>Methods Reclaimed</td></tr>
+<tr><td>totalSweepTime</td><td>Tickspan</td><td>Time Spent Sweeping</td></tr>
+<tr><td>peakFractionTime</td><td>Tickspan</td><td>Peak Time Fraction Sweep</td></tr>
+<tr><td>peakSweepTime</td><td>Tickspan</td><td>Peak Time Full Sweep</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>CodeSweeperConfiguration</td><td>[Java Virtual Machine, Code Sweeper]</td><td>Code Sweeper Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>sweeperEnabled</td><td>boolean</td><td></td><td>Code Sweeper Enabled</td></tr>
+<tr><td>flushingEnabled</td><td>boolean</td><td></td><td>Code Cache Flushing Enabled</td></tr>
+<tr><td>sweepThreshold</td><td>ulong</td><td>bytes</td><td>Sweep Threshold</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>IntFlag</td><td>[Java Virtual Machine, Flag]</td><td>Int Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>int</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>UnsignedIntFlag</td><td>[Java Virtual Machine, Flag]</td><td>Unsigned Int Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>uint</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>LongFlag</td><td>[Java Virtual Machine, Flag]</td><td>Long Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>long</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>UnsignedLongFlag</td><td>[Java Virtual Machine, Flag]</td><td>Unsigned Long Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>ulong</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>DoubleFlag</td><td>[Java Virtual Machine, Flag]</td><td>Double Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>double</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>BooleanFlag</td><td>[Java Virtual Machine, Flag]</td><td>Boolean Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>boolean</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>StringFlag</td><td>[Java Virtual Machine, Flag]</td><td>String Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>value</td><td>string</td><td>Value</td></tr>
+<tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ObjectCount</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Object Count</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td></td><td>GC Identifier</td></tr>
+<tr><td>objectClass</td><td>Class</td><td></td><td>Object Class</td></tr>
+<tr><td>count</td><td>long</td><td></td><td>Count</td></tr>
+<tr><td>totalSize</td><td>ulong</td><td>bytes</td><td>Total Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>G1HeapRegionInformation</td><td>[Java Virtual Machine, GC, Detailed]</td><td>G1 Heap Region Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>index</td><td>uint</td><td></td><td>Index</td></tr>
+<tr><td>type</td><td>G1HeapRegionType</td><td></td><td>Type</td></tr>
+<tr><td>start</td><td>ulong</td><td>address</td><td>Start</td></tr>
+<tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCConfiguration</td><td>[Java Virtual Machine, GC, Configuration]</td><td>GC Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>youngCollector</td><td>GCName</td><td></td><td>Young Garbage Collector</td><td>The garbage collector used for the young generation</td></tr>
+<tr><td>oldCollector</td><td>GCName</td><td></td><td>Old Garbage Collector</td><td>The garbage collector used for the old generation</td></tr>
+<tr><td>parallelGCThreads</td><td>uint</td><td></td><td>Parallel GC Threads</td><td>Number of parallel threads to use for garbage collection</td></tr>
+<tr><td>concurrentGCThreads</td><td>uint</td><td></td><td>Concurrent GC Threads</td><td>Number of concurrent threads to use for garbage collection</td></tr>
+<tr><td>usesDynamicGCThreads</td><td>boolean</td><td></td><td>Uses Dynamic GC Threads</td><td>Whether a dynamic number of GC threads are used or not</td></tr>
+<tr><td>isExplicitGCConcurrent</td><td>boolean</td><td></td><td>Concurrent Explicit GC</td><td>Whether System.gc() is concurrent or not</td></tr>
+<tr><td>isExplicitGCDisabled</td><td>boolean</td><td></td><td>Disabled Explicit GC</td><td>Whether System.gc() will cause a garbage collection or not</td></tr>
+<tr><td>pauseTarget</td><td>long</td><td>millis</td><td>Pause Target</td><td>Target for GC pauses</td></tr>
+<tr><td>gcTimeRatio</td><td>uint</td><td></td><td>GC Time Ratio</td><td>Target for runtime vs garbage collection time</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCSurvivorConfiguration</td><td>[Java Virtual Machine, GC, Configuration]</td><td>GC Survivor Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>maxTenuringThreshold</td><td>ubyte</td><td>Maximum Tenuring Threshold</td><td>Upper limit for the age of how old objects to keep in the survivor area</td></tr>
+<tr><td>initialTenuringThreshold</td><td>ubyte</td><td>Initial Tenuring Threshold</td><td>Initial age limit for how old objects to keep in survivor area</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCTLABConfiguration</td><td>[Java Virtual Machine, GC, Configuration]</td><td>TLAB Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>usesTLABs</td><td>boolean</td><td></td><td>TLABs Used</td><td>If Thread Local Allocation Buffers (TLABs) are in use</td></tr>
+<tr><td>minTLABSize</td><td>ulong</td><td>bytes</td><td>Minimum TLAB Size</td><td></td></tr>
+<tr><td>tlabRefillWasteLimit</td><td>ulong</td><td>bytes</td><td>TLAB Refill Waste Limit</td><td></td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCHeapConfiguration</td><td>[Java Virtual Machine, GC, Configuration]</td><td>GC Heap Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>minSize</td><td>ulong</td><td>bytes</td><td>Minimum Heap Size</td><td></td></tr>
+<tr><td>maxSize</td><td>ulong</td><td>bytes</td><td>Maximum Heap Size</td><td></td></tr>
+<tr><td>initialSize</td><td>ulong</td><td>bytes</td><td>Initial Heap Size</td><td></td></tr>
+<tr><td>usesCompressedOops</td><td>boolean</td><td></td><td>If Compressed Oops Are Used</td><td>If compressed Oops (Ordinary Object Pointers) are enabled</td></tr>
+<tr><td>compressedOopsMode</td><td>NarrowOopMode</td><td></td><td>Compressed Oops Mode</td><td>The kind of compressed oops being used</td></tr>
+<tr><td>objectAlignment</td><td>ulong</td><td>bytes</td><td>Object Alignment</td><td>Object alignment (in bytes) on the heap</td></tr>
+<tr><td>heapAddressBits</td><td>ubyte</td><td></td><td>Heap Address Size</td><td>Heap Address Size (in bits)</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>YoungGenerationConfiguration</td><td>[Java Virtual Machine, GC, Configuration]</td><td>Young Generation Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>minSize</td><td>ulong</td><td>bytes</td><td>Minimum Young Generation Size</td><td></td></tr>
+<tr><td>maxSize</td><td>ulong</td><td>bytes</td><td>Maximum Young Generation Size</td><td></td></tr>
+<tr><td>newRatio</td><td>uint</td><td></td><td>New Ratio</td><td>The size of the young generation relative to the tenured generation</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZAllocationStall</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Allocation Stall</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>ZPageTypeType</td><td></td><td>Type</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZPageAllocation</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Page Allocation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>ZPageTypeType</td><td></td><td>Type</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
+<tr><td>flushed</td><td>ulong</td><td>bytes</td><td>Flushed</td></tr>
+<tr><td>committed</td><td>ulong</td><td>bytes</td><td>Committed</td></tr>
+<tr><td>segments</td><td>uint</td><td></td><td>Segments</td></tr>
+<tr><td>nonBlocking</td><td>boolean</td><td></td><td>Non-blocking</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZRelocationSet</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Relocation Set</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>total</td><td>ulong</td><td>bytes</td><td>Total</td></tr>
+<tr><td>empty</td><td>ulong</td><td>bytes</td><td>Empty</td></tr>
+<tr><td>relocate</td><td>ulong</td><td>bytes</td><td>Relocate</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZRelocationSetGroup</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Relocation Set Group</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>ZPageTypeType</td><td></td><td>Type</td></tr>
+<tr><td>pages</td><td>ulong</td><td></td><td>Pages</td></tr>
+<tr><td>total</td><td>ulong</td><td>bytes</td><td>Total</td></tr>
+<tr><td>empty</td><td>ulong</td><td>bytes</td><td>Empty</td></tr>
+<tr><td>relocate</td><td>ulong</td><td>bytes</td><td>Relocate</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZStatisticsCounter</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Statistics Counter</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>ZStatisticsCounterType</td><td>Id</td></tr>
+<tr><td>increment</td><td>ulong</td><td>Increment</td></tr>
+<tr><td>value</td><td>ulong</td><td>Value</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZStatisticsSampler</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Statistics Sampler</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>ZStatisticsSamplerType</td><td>Id</td></tr>
+<tr><td>value</td><td>ulong</td><td>Value</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZThreadPhase</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Thread Phase</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZUncommit</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Uncommit</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>uncommitted</td><td>ulong</td><td>bytes</td><td>Uncommitted</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ZUnmap</td><td>[Java Virtual Machine, GC, Detailed]</td><td>ZGC Unmap</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>unmapped</td><td>ulong</td><td>bytes</td><td>Unmapped</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ShenandoahHeapRegionStateChange</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Shenandoah Heap Region State Change</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>index</td><td>uint</td><td></td><td>Index</td></tr>
+<tr><td>from</td><td>ShenandoahHeapRegionState</td><td></td><td>From</td></tr>
+<tr><td>to</td><td>ShenandoahHeapRegionState</td><td></td><td>To</td></tr>
+<tr><td>start</td><td>ulong</td><td>address</td><td>Start</td></tr>
+<tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>ShenandoahHeapRegionInformation</td><td>[Java Virtual Machine, GC, Detailed]</td><td>Shenandoah Heap Region Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>index</td><td>uint</td><td></td><td>Index</td></tr>
+<tr><td>state</td><td>ShenandoahHeapRegionState</td><td></td><td>State</td></tr>
+<tr><td>start</td><td>ulong</td><td>address</td><td>Start</td></tr>
+<tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>Flush</td><td>[Flight Recorder]</td><td>Flush</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>flushId</td><td>ulong</td><td></td><td>Flush Identifier</td></tr>
+<tr><td>elements</td><td>ulong</td><td></td><td>Elements Written</td></tr>
+<tr><td>size</td><td>ulong</td><td>bytes</td><td>Size Written</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>HeapDump</td><td>[Java Virtual Machine, Diagnostics]</td><td>Heap Dump</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>destination</td><td>string</td><td>Destination</td></tr>
+<tr><td>size</td><td>long</td><td>Size</td></tr>
+<tr><td>gcBeforeDump</td><td>boolean</td><td>GC Before Dump</td></tr>
+<tr><td>onOutOfMemoryError</td><td>boolean</td><td>On Out of Memory Error</td></tr>
+</tbody>
+</table></td></tr>
+</tbody>
+</table>
+</body>
+</html>
