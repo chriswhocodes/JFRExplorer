@@ -13,6 +13,8 @@
 </head>
 <body>
 <h1>JFR Explorer</h1>
+<h3>Very early preview version! Idea for this tool by Johannes Bechberger. <a href="https://github.com/chriswhocodes/JFRExplorer">JFRExplorer
+    on GitHub</a></h3>
 <script type="text/javascript">
     function getParam() {
         return window.location.href.slice(window.location.href.indexOf('?') + 1)
@@ -27,64 +29,60 @@
                         {
                             "scrollX": true,
                             "autoWidth": false,
-                            "pageLength": 50,
+                            "pageLength": 500,
                             "lengthChange": false,
                             "columnDefs": [{
                                 "targets": $ALLCOLUMNS,
-                                "orderable"
-            :
-                true,
-            }],
-                "oLanguage"
-            :
-                {
-                    "sSearch"
-                :
-                    "Search JFR Events: "
-                }
-            ,
-                initComplete: function () {
-                    this.api().search(getParam());
+                                "orderable":
+                                    true,
+                            }],
+                            "oLanguage":
+                                {
+                                    "sSearch":
+                                        "Search JFR Events: "
+                                }
+                            ,
+                            initComplete: function () {
+                                this.api().search(getParam());
 
-                    this.api().draw();
+                                this.api().draw();
 
-                    this
-                        .api()
-                        .columns( $SORTCOLUMNS
-                )
-                .
-                    every(
-                        function () {
-                            var column = this;
-                            var select = $(
-                                '<select><option value="">Show All</option></select>')
-                                .appendTo(
-                                    $(column.header()).empty()).on(
-                                    'change',
-                                    function () {
-                                        var val = $.fn.dataTable.util
-                                            .escapeRegex($(this)
-                                                .val());
+                                this
+                                    .api()
+                                    .columns($SORTCOLUMNS
+                                    )
+                                    .every(
+                                        function () {
+                                            var column = this;
+                                            var select = $(
+                                                '<select><option value="">Show All</option></select>')
+                                                .appendTo(
+                                                    $(column.header()).empty()).on(
+                                                    'change',
+                                                    function () {
+                                                        var val = $.fn.dataTable.util
+                                                            .escapeRegex($(this)
+                                                                .val());
 
-                                        column.search(
-                                            val ? '^' + val + '$'
-                                                : '', true, false)
-                                            .draw();
-                                    });
+                                                        column.search(
+                                                            val ? '^' + val + '$'
+                                                                : '', true, false)
+                                                            .draw();
+                                                    });
 
-                            column
-                                .data()
-                                .unique()
-                                .sort()
-                                .each(
-                                    function (d, j) {
-                                        select
-                                            .append('<option value="' + d + '">'
-                                                + d + '</option>')
-                                    });
-                        });
-                }
-            })
+                                            column
+                                                .data()
+                                                .unique()
+                                                .sort()
+                                                .each(
+                                                    function (d, j) {
+                                                        select
+                                                            .append('<option value="' + d + '">'
+                                                                + d + '</option>')
+                                                    });
+                                        });
+                            }
+                        })
                 ;
             });
 </script>

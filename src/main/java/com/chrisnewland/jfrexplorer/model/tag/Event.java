@@ -1,7 +1,6 @@
 package com.chrisnewland.jfrexplorer.model.tag;
 
 import com.chrisnewland.jfrexplorer.util.HtmlUtil;
-import com.chrisnewland.jfrexplorer.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +10,7 @@ import java.util.Set;
 public class Event
 {
 	private String name;
-	private List<String> categoryList;
+	private String category;
 	private String label;
 	private boolean thread;
 	private boolean startTime;
@@ -19,10 +18,10 @@ public class Event
 
 	private List<Field> fieldList = new ArrayList<>();
 
-	public Event(String name, String categories, String label, boolean thread, boolean startTime, boolean stackTrace)
+	public Event(String name, String category, String label, boolean thread, boolean startTime, boolean stackTrace)
 	{
 		this.name = name;
-		this.categoryList = StringUtil.splitCommaString(categories);
+		this.category = category == null ? null : category.replace("Java Virtual Machine", "JVM").replace(", ", " ->  ");
 		this.label = label;
 		this.thread = thread;
 		this.startTime = startTime;
@@ -37,18 +36,18 @@ public class Event
 	@Override
 	public String toString()
 	{
-		return "Event{" + "name='" + name + '\'' + ", categoryList=" + categoryList + ", label='" + label + '\'' + ", thread="
-				+ thread + ", startTime=" + startTime + ", stackTrace=" + stackTrace + ", fieldList=" + fieldList + '}';
+		return "Event{" + "name='" + name + '\'' + ", category=" + category + ", label='" + label + '\'' + ", thread=" + thread
+				+ ", startTime=" + startTime + ", stackTrace=" + stackTrace + ", fieldList=" + fieldList + '}';
 	}
 
 	public static CharSequence rowHeader()
 	{
-		return HtmlUtil.tr("th", "Name", "Categories", "Label", "Thread", "StartTime", "StackTrace", "Fields");
+		return HtmlUtil.tr("th", "Name", "Category", "Label", "Thread", "StartTime", "StackTrace", "Fields");
 	}
 
 	public CharSequence toRow()
 	{
-		return HtmlUtil.tr("td", name, categoryList.toString(), label, thread, startTime, stackTrace, getFieldHtml());
+		return HtmlUtil.tr("td", name, category, label, thread, startTime, stackTrace, getFieldHtml());
 	}
 
 	private CharSequence getFieldHtml()
@@ -75,10 +74,10 @@ public class Event
 			{
 				hasValue[3] = true;
 			}
-//			if (field.getRelation() != null)
-//			{
-//				hasValue[4] = true;
-//			}
+			//			if (field.getRelation() != null)
+			//			{
+			//				hasValue[4] = true;
+			//			}
 			if (field.getDescription() != null)
 			{
 				hasValue[4] = true;
@@ -110,9 +109,9 @@ public class Event
 		return name;
 	}
 
-	public List<String> getCategoryList()
+	public String getCategory()
 	{
-		return categoryList;
+		return category;
 	}
 
 	public String getLabel()
