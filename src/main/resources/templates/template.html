@@ -31,11 +31,6 @@
                             "autoWidth": false,
                             "pageLength": 500,
                             "lengthChange": false,
-                            "columnDefs": [{
-                                "targets": $ALLCOLUMNS,
-                                "orderable":
-                                    true,
-                            }],
                             "oLanguage":
                                 {
                                     "sSearch":
@@ -44,43 +39,7 @@
                             ,
                             initComplete: function () {
                                 this.api().search(getParam());
-
                                 this.api().draw();
-
-                                this
-                                    .api()
-                                    .columns($SORTCOLUMNS
-                                    )
-                                    .every(
-                                        function () {
-                                            var column = this;
-                                            var select = $(
-                                                '<select><option value="">Show All</option></select>')
-                                                .appendTo(
-                                                    $(column.header()).empty()).on(
-                                                    'change',
-                                                    function () {
-                                                        var val = $.fn.dataTable.util
-                                                            .escapeRegex($(this)
-                                                                .val());
-
-                                                        column.search(
-                                                            val ? '^' + val + '$'
-                                                                : '', true, false)
-                                                            .draw();
-                                                    });
-
-                                            column
-                                                .data()
-                                                .unique()
-                                                .sort()
-                                                .each(
-                                                    function (d, j) {
-                                                        select
-                                                            .append('<option value="' + d + '">'
-                                                                + d + '</option>')
-                                                    });
-                                        });
                             }
                         })
                 ;

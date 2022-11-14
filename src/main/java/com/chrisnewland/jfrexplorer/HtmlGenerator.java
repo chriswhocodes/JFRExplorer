@@ -28,8 +28,6 @@ public class HtmlGenerator
 
 			template = template.replace("%TITLE%", "JFR Events");
 			template = template.replace("%BODY%", eventTable);
-			template = template.replace("$ALLCOLUMNS", "[0,1,2,3,4]");
-			template = template.replace("$SORTCOLUMNS", "[]");
 
 			Files.write(outputPath, template.getBytes(StandardCharsets.UTF_8));
 		}

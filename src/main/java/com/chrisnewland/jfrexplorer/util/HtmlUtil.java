@@ -2,7 +2,6 @@ package com.chrisnewland.jfrexplorer.util;
 
 public class HtmlUtil
 {
-
 	public static CharSequence table(String cssClass, CharSequence headerRow, CharSequence rows)
 	{
 		return table(null, cssClass, headerRow, rows);

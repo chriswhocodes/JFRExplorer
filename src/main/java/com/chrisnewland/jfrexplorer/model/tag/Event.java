@@ -59,7 +59,6 @@ public class Event
 		}
 
 		return HtmlUtil.table("attributeTable", Attribute.rowHeader(), attributeRows);
-
 	}
 
 	private CharSequence getFieldHtml()

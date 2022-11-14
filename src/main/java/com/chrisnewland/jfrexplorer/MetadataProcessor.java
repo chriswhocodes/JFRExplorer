@@ -47,7 +47,7 @@ public class MetadataProcessor
 
 		Model model = metadataProcessor.process();
 
-		System.out.println(model);
+		//System.out.println(model);
 
 		Path resourcesPath = Paths.get(args[2]);
 
@@ -61,6 +61,8 @@ public class MetadataProcessor
 
 	private Model process() throws Exception
 	{
+		System.out.println("processing " + metadataPath);
+
 		List<String> lines = Files.readAllLines(metadataPath);
 
 		iterator = lines.iterator();
@@ -126,7 +128,8 @@ public class MetadataProcessor
 
 				if (attrMap != null && !attrMap.isEmpty())
 				{
-					System.out.println(line);
+					System.out.println(metadataPath + " : " + line);
+
 					for (Map.Entry<String, String> entry : attrMap.entrySet())
 					{
 						System.out.println("unprocessed:" + entry);
@@ -142,7 +145,7 @@ public class MetadataProcessor
 	{
 		String line = iterator.next();
 
-		while (!line.endsWith(">"))
+		while (!line.stripTrailing().endsWith(">"))
 		{
 			line += iterator.next();
 		}

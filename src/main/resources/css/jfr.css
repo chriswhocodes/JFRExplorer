@@ -21,6 +21,11 @@ body {
 #myTable {
     font-family: monospace;
     font-size: 14px;
+    vertical-align: top;
+}
+
+#myTable tbody td {
+    vertical-align: top;
 }
 
 
@@ -40,12 +45,20 @@ th, td {
     border: 2px solid black;
 }
 
+.attributeTable {
+    border-collapse: collapse;
+}
+
+.attributeTable td, .attributeTable th, .attributeTable thead, .attributeTable tbody {
+    border: 2px solid black;
+}
+
 .fieldTable {
     border-collapse: collapse;
 }
 
-.fieldTable tbody td, .fieldTable thead th {
-    border: 1px solid black;
+.fieldTable td, .fieldTable th, .fieldTable thead, .fieldTable tbody {
+    border: 2px solid black;
 }
 
 .links {
