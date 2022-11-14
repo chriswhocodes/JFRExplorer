@@ -1,31 +1,30 @@
 package com.chrisnewland.jfrexplorer.model.tag;
 
+import com.chrisnewland.jfrexplorer.model.Attribute;
 import com.chrisnewland.jfrexplorer.util.HtmlUtil;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Event
 {
 	private String name;
 	private String category;
 	private String label;
-	private boolean thread;
-	private boolean startTime;
-	private boolean stackTrace;
+
+	private List<Attribute> attributeList = new ArrayList<>();
 
 	private List<Field> fieldList = new ArrayList<>();
 
-	public Event(String name, String category, String label, boolean thread, boolean startTime, boolean stackTrace)
+	public Event(String name, String category, String label, Map<String, String> unprocessedAttributes)
 	{
 		this.name = name;
 		this.category = category == null ? null : category.replace("Java Virtual Machine", "JVM").replace(", ", " ->  ");
 		this.label = label;
-		this.thread = thread;
-		this.startTime = startTime;
-		this.stackTrace = stackTrace;
+
+		for (Map.Entry<String, String> entry : unprocessedAttributes.entrySet())
+		{
+			this.attributeList.add(new Attribute(entry.getKey(), entry.getValue()));
+		}
 	}
 
 	public void addField(Field field)
@@ -36,18 +35,31 @@ public class Event
 	@Override
 	public String toString()
 	{
-		return "Event{" + "name='" + name + '\'' + ", category=" + category + ", label='" + label + '\'' + ", thread=" + thread
-				+ ", startTime=" + startTime + ", stackTrace=" + stackTrace + ", fieldList=" + fieldList + '}';
+		return "Event{" + "name='" + name + '\'' + ", category=" + category + ", label='" + label + '\'' + ", attributeList="
+				+ attributeList + ", fieldList=" + fieldList + '}';
 	}
 
 	public static CharSequence rowHeader()
 	{
-		return HtmlUtil.tr("th", "Name", "Category", "Label", "Thread", "StartTime", "StackTrace", "Fields");
+		return HtmlUtil.tr("th", "Name", "Category", "Label", "Attributes", "Fields");
 	}
 
 	public CharSequence toRow()
 	{
-		return HtmlUtil.tr("td", name, category, label, thread, startTime, stackTrace, getFieldHtml());
+		return HtmlUtil.tr("td", name, category, label, getAttributesHtml(), getFieldHtml());
+	}
+
+	private CharSequence getAttributesHtml()
+	{
+		StringBuilder attributeRows = new StringBuilder();
+
+		for (Attribute attribute : attributeList)
+		{
+			attributeRows.append(attribute.toRow());
+		}
+
+		return HtmlUtil.table("attributeTable", Attribute.rowHeader(), attributeRows);
+
 	}
 
 	private CharSequence getFieldHtml()
@@ -117,25 +129,5 @@ public class Event
 	public String getLabel()
 	{
 		return label;
-	}
-
-	public boolean isThread()
-	{
-		return thread;
-	}
-
-	public boolean isStartTime()
-	{
-		return startTime;
-	}
-
-	public boolean isStackTrace()
-	{
-		return stackTrace;
-	}
-
-	public List<Field> getFieldList()
-	{
-		return fieldList;
 	}
 }

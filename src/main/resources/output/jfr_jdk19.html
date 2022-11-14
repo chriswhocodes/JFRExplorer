@@ -32,7 +32,7 @@
                             "pageLength": 500,
                             "lengthChange": false,
                             "columnDefs": [{
-                                "targets": [0,1,2,3,4,5,6],
+                                "targets": [0,1,2,3,4],
                                 "orderable":
                                     true,
                             }],
@@ -100,24 +100,54 @@
 </div>
 <table id="myTable" class="display cell-border">
 <thead>
-<tr><th>Name</th><th>Category</th><th>Label</th><th>Thread</th><th>StartTime</th><th>StackTrace</th><th>Fields</th></tr>
+<tr><th>Name</th><th>Category</th><th>Label</th><th>Attributes</th><th>Fields</th></tr>
 </thead>
 <tbody>
-<tr><td>Duration</td><td>JVM ->  Internal</td><td>Duration</td><td>true</td><td>true</td><td>false</td><td><table class="fieldTable">
+<tr><td>Duration</td><td>JVM ->  Internal</td><td>Duration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>internal</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr></tr>
 </thead>
 <tbody>
 </tbody>
 </table></td></tr>
-<tr><td>Instant</td><td>JVM ->  Internal</td><td>Instant</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>Instant</td><td>JVM ->  Internal</td><td>Instant</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>internal</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr></tr>
 </thead>
 <tbody>
 </tbody>
 </table></td></tr>
-<tr><td>Value</td><td>JVM ->  Internal</td><td>Value</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>Value</td><td>JVM ->  Internal</td><td>Value</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>internal</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -125,7 +155,17 @@
 <tr><td>value</td><td>ulong</td><td>Value</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>Text</td><td>JVM ->  Internal</td><td>Text</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>Text</td><td>JVM ->  Internal</td><td>Text</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>internal</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -133,7 +173,16 @@
 <tr><td>text</td><td>string</td><td>Text</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZThreadDebug</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Thread Event</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZThreadDebug</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Thread Event</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Temporary latency measurements used during development and debugging of ZGC</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>internal</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -142,7 +191,16 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadStart</td><td>Java Application</td><td>Java Thread Start</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ThreadStart</td><td>Java Application</td><td>Java Thread Start</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -151,7 +209,15 @@
 <tr><td>parentThread</td><td>Thread</td><td>Parent Java Thread</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadEnd</td><td>Java Application</td><td>Java Thread End</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ThreadEnd</td><td>Java Application</td><td>Java Thread End</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -159,7 +225,15 @@
 <tr><td>thread</td><td>Thread</td><td>Java Thread</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadPark</td><td>Java Application</td><td>Java Thread Park</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ThreadPark</td><td>Java Application</td><td>Java Thread Park</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -170,7 +244,15 @@
 <tr><td>address</td><td>ulong</td><td>address</td><td>Address of Object Parked</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>JavaMonitorEnter</td><td>Java Application</td><td>Java Monitor Blocked</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>JavaMonitorEnter</td><td>Java Application</td><td>Java Monitor Blocked</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -180,7 +262,16 @@
 <tr><td>address</td><td>ulong</td><td>address</td><td>Monitor Address</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>JavaMonitorWait</td><td>Java Application</td><td>Java Monitor Wait</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>JavaMonitorWait</td><td>Java Application</td><td>Java Monitor Wait</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Waiting on a Java monitor</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -192,7 +283,15 @@
 <tr><td>address</td><td>ulong</td><td>address</td><td>Monitor Address</td><td>Address of object waited on</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>JavaMonitorInflate</td><td>Java Application</td><td>Java Monitor Inflated</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>JavaMonitorInflate</td><td>Java Application</td><td>Java Monitor Inflated</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -202,7 +301,17 @@
 <tr><td>cause</td><td>InflateCause</td><td></td><td>Monitor Inflation Cause</td><td>Cause of inflation</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SyncOnValueBasedClass</td><td>JVM ->  Diagnostics</td><td>Value Based Class Synchronization</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>SyncOnValueBasedClass</td><td>JVM ->  Diagnostics</td><td>Value Based Class Synchronization</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>experimental</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -210,7 +319,17 @@
 <tr><td>valueBasedClass</td><td>Class</td><td>Value Based Class</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ContinuationFreeze</td><td>JVM ->  Runtime</td><td>Continuation Yield</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ContinuationFreeze</td><td>JVM ->  Runtime</td><td>Continuation Yield</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>experimental</td><td>true</td></tr>
+<tr><td>description</td><td>Invocation of Continuation.yield()</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -222,7 +341,17 @@
 <tr><td>size</td><td>ushort</td><td>bytes</td><td>Stack Size</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ContinuationThaw</td><td>JVM ->  Runtime</td><td>Continuation Continue</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ContinuationThaw</td><td>JVM ->  Runtime</td><td>Continuation Continue</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>experimental</td><td>true</td></tr>
+<tr><td>description</td><td>Invocation of Continuation.run() on a started continuation</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -234,7 +363,17 @@
 <tr><td>size</td><td>ushort</td><td>bytes</td><td>Stack Size</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ContinuationFreezeYoung</td><td>JVM ->  Runtime</td><td>Continuation Freeze Young</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ContinuationFreezeYoung</td><td>JVM ->  Runtime</td><td>Continuation Freeze Young</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>experimental</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -244,7 +383,17 @@
 <tr><td>allocate</td><td>boolean</td><td>Allocated New</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ContinuationFreezeOld</td><td>JVM ->  Runtime</td><td>Continuation Freeze Old</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ContinuationFreezeOld</td><td>JVM ->  Runtime</td><td>Continuation Freeze Old</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>experimental</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -252,7 +401,17 @@
 <tr><td>id</td><td>ulong</td><td>Continuation ID</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ContinuationThawYoung</td><td>JVM ->  Runtime</td><td>Continuation Thaw Young</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ContinuationThawYoung</td><td>JVM ->  Runtime</td><td>Continuation Thaw Young</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>experimental</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -262,7 +421,17 @@
 <tr><td>size</td><td>uint</td><td>Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ContinuationThawOld</td><td>JVM ->  Runtime</td><td>Continuation Thaw Old</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ContinuationThawOld</td><td>JVM ->  Runtime</td><td>Continuation Thaw Old</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>experimental</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -270,7 +439,17 @@
 <tr><td>id</td><td>ulong</td><td>Continuation ID</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ReservedStackActivation</td><td>JVM ->  Runtime</td><td>Reserved Stack Activation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ReservedStackActivation</td><td>JVM ->  Runtime</td><td>Reserved Stack Activation</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Activation of Reserved Stack Area caused by stack overflow with ReservedStackAccess annotated method in call stack</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -278,7 +457,15 @@
 <tr><td>method</td><td>Method</td><td>Java Method</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ClassLoad</td><td>JVM ->  Class Loading</td><td>Class Load</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ClassLoad</td><td>JVM ->  Class Loading</td><td>Class Load</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -288,7 +475,16 @@
 <tr><td>initiatingClassLoader</td><td>ClassLoader</td><td>Initiating Class Loader</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ClassDefine</td><td>JVM ->  Class Loading</td><td>Class Define</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ClassDefine</td><td>JVM ->  Class Loading</td><td>Class Define</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -297,7 +493,16 @@
 <tr><td>definingClassLoader</td><td>ClassLoader</td><td>Defining Class Loader</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ClassRedefinition</td><td>JVM ->  Class Loading</td><td>Class Redefinition</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ClassRedefinition</td><td>JVM ->  Class Loading</td><td>Class Redefinition</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -307,7 +512,15 @@
 <tr><td>redefinitionId</td><td>ulong</td><td>Class Redefinition Id</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>RedefineClasses</td><td>JVM ->  Class Loading</td><td>Redefine Classes</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>RedefineClasses</td><td>JVM ->  Class Loading</td><td>Redefine Classes</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -316,7 +529,15 @@
 <tr><td>redefinitionId</td><td>ulong</td><td>Class Redefinition Id</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>RetransformClasses</td><td>JVM ->  Class Loading</td><td>Retransform Classes</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>RetransformClasses</td><td>JVM ->  Class Loading</td><td>Retransform Classes</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -325,7 +546,15 @@
 <tr><td>redefinitionId</td><td>ulong</td><td>Class Redefinition Id</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ClassUnload</td><td>JVM ->  Class Loading</td><td>Class Unload</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ClassUnload</td><td>JVM ->  Class Loading</td><td>Class Unload</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -334,7 +563,14 @@
 <tr><td>definingClassLoader</td><td>ClassLoader</td><td>Defining Class Loader</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>IntFlagChanged</td><td>JVM ->  Flag</td><td>Int Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>IntFlagChanged</td><td>JVM ->  Flag</td><td>Int Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -345,7 +581,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>UnsignedIntFlagChanged</td><td>JVM ->  Flag</td><td>Unsigned Int Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>UnsignedIntFlagChanged</td><td>JVM ->  Flag</td><td>Unsigned Int Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -356,7 +599,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>LongFlagChanged</td><td>JVM ->  Flag</td><td>Long Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>LongFlagChanged</td><td>JVM ->  Flag</td><td>Long Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -367,7 +617,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>UnsignedLongFlagChanged</td><td>JVM ->  Flag</td><td>Unsigned Long Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>UnsignedLongFlagChanged</td><td>JVM ->  Flag</td><td>Unsigned Long Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -378,7 +635,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>DoubleFlagChanged</td><td>JVM ->  Flag</td><td>Double Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>DoubleFlagChanged</td><td>JVM ->  Flag</td><td>Double Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -389,7 +653,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>BooleanFlagChanged</td><td>JVM ->  Flag</td><td>Boolean Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>BooleanFlagChanged</td><td>JVM ->  Flag</td><td>Boolean Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -400,7 +671,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>StringFlagChanged</td><td>JVM ->  Flag</td><td>String Flag Changed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>StringFlagChanged</td><td>JVM ->  Flag</td><td>String Flag Changed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -411,7 +689,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCHeapSummary</td><td>JVM ->  GC ->  Heap</td><td>Heap Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCHeapSummary</td><td>JVM ->  GC ->  Heap</td><td>Heap Summary</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -422,7 +707,14 @@
 <tr><td>heapUsed</td><td>ulong</td><td>bytes</td><td>Heap Used</td><td>Bytes allocated by objects in the heap</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>MetaspaceSummary</td><td>JVM ->  GC ->  Heap</td><td>Metaspace Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>MetaspaceSummary</td><td>JVM ->  GC ->  Heap</td><td>Metaspace Summary</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -435,7 +727,14 @@
 <tr><td>classSpace</td><td>MetaspaceSizes</td><td></td><td>Class</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>MetaspaceGCThreshold</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace GC Threshold</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>MetaspaceGCThreshold</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace GC Threshold</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -445,7 +744,15 @@
 <tr><td>updater</td><td>GCThresholdUpdater</td><td></td><td>Updater</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>MetaspaceAllocationFailure</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace Allocation Failure</td><td>false</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>MetaspaceAllocationFailure</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace Allocation Failure</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -457,7 +764,15 @@
 <tr><td>metaspaceObjectType</td><td>MetaspaceObjectType</td><td></td><td>Metaspace Object Type</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>MetaspaceOOM</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace Out of Memory</td><td>false</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>MetaspaceOOM</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace Out of Memory</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -469,7 +784,14 @@
 <tr><td>metaspaceObjectType</td><td>MetaspaceObjectType</td><td></td><td>Metaspace Object Type</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>MetaspaceChunkFreeListSummary</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace Chunk Free List Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>MetaspaceChunkFreeListSummary</td><td>JVM ->  GC ->  Metaspace</td><td>Metaspace Chunk Free List Summary</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -487,7 +809,14 @@
 <tr><td>humongousChunksTotalSize</td><td>ulong</td><td>bytes</td><td>Humongous Chunks Total Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>PSHeapSummary</td><td>JVM ->  GC ->  Heap</td><td>Parallel Scavenge Heap Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>PSHeapSummary</td><td>JVM ->  GC ->  Heap</td><td>Parallel Scavenge Heap Summary</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -502,7 +831,14 @@
 <tr><td>toSpace</td><td>ObjectSpace</td><td>To Space</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1HeapSummary</td><td>JVM ->  GC ->  Heap</td><td>G1 Heap Summary</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1HeapSummary</td><td>JVM ->  GC ->  Heap</td><td>G1 Heap Summary</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -515,7 +851,14 @@
 <tr><td>numberOfRegions</td><td>uint</td><td></td><td>Number of Regions</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Garbage Collection</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Garbage collection performed by the JVM</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -527,7 +870,16 @@
 <tr><td>longestPause</td><td>Tickspan</td><td>Longest Pause</td><td>Longest individual pause during the garbage collection</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SystemGC</td><td>JVM ->  GC ->  Collector</td><td>System GC</td><td>true</td><td>true</td><td>true</td><td><table class="fieldTable">
+<tr><td>SystemGC</td><td>JVM ->  GC ->  Collector</td><td>System GC</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -535,7 +887,14 @@
 <tr><td>invokedConcurrent</td><td>boolean</td><td>Invoked Concurrent</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ParallelOldGarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Parallel Old Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ParallelOldGarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Parallel Old Garbage Collection</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Extra information specific to Parallel Old Garbage Collections</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -544,7 +903,14 @@
 <tr><td>densePrefix</td><td>ulong</td><td>address</td><td>Dense Prefix</td><td>The address of the dense prefix, used when compacting</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>YoungGarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Young Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>YoungGarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Young Garbage Collection</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Extra information specific to Young Garbage Collections</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -553,7 +919,14 @@
 <tr><td>tenuringThreshold</td><td>uint</td><td>Tenuring Threshold</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>OldGarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Old Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>OldGarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>Old Garbage Collection</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Extra information specific to Old Garbage Collections</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -561,7 +934,14 @@
 <tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1GarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>G1 Young Garbage Collection</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1GarbageCollection</td><td>JVM ->  GC ->  Collector</td><td>G1 Young Garbage Collection</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Extra information specific to G1 Young Garbage Collections</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -570,7 +950,14 @@
 <tr><td>type</td><td>G1YCType</td><td>Type</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1MMU</td><td>JVM ->  GC ->  Detailed</td><td>G1 MMU Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1MMU</td><td>JVM ->  GC ->  Detailed</td><td>G1 MMU Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -581,7 +968,14 @@
 <tr><td>pauseTarget</td><td>long</td><td>millis</td><td>Pause Target</td><td>Max time allowed to be spent on GC during last time slice</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>EvacuationInformation</td><td>JVM ->  GC ->  Detailed</td><td>Evacuation Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>EvacuationInformation</td><td>JVM ->  GC ->  Detailed</td><td>Evacuation Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -597,7 +991,15 @@
 <tr><td>regionsFreed</td><td>uint</td><td></td><td>Regions Freed</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCReferenceStatistics</td><td>JVM ->  GC ->  Reference</td><td>GC Reference Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCReferenceStatistics</td><td>JVM ->  GC ->  Reference</td><td>GC Reference Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Total count of processed references during GC</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -607,7 +1009,14 @@
 <tr><td>count</td><td>ulong</td><td>Total Count</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ObjectCountAfterGC</td><td>JVM ->  GC ->  Detailed</td><td>Object Count after GC</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ObjectCountAfterGC</td><td>JVM ->  GC ->  Detailed</td><td>Object Count after GC</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -618,7 +1027,15 @@
 <tr><td>totalSize</td><td>ulong</td><td>bytes</td><td>Total Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1EvacuationYoungStatistics</td><td>JVM ->  GC ->  Detailed</td><td>G1 Evacuation Statistics for Young</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1EvacuationYoungStatistics</td><td>JVM ->  GC ->  Detailed</td><td>G1 Evacuation Statistics for Young</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Memory related evacuation statistics during GC for the young generation</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -626,7 +1043,15 @@
 <tr><td>statistics</td><td>G1EvacuationStatistics</td><td>Evacuation Statistics</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1EvacuationOldStatistics</td><td>JVM ->  GC ->  Detailed</td><td>G1 Evacuation Memory Statistics for Old</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1EvacuationOldStatistics</td><td>JVM ->  GC ->  Detailed</td><td>G1 Evacuation Memory Statistics for Old</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Memory related evacuation statistics during GC for the old generation</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -634,7 +1059,15 @@
 <tr><td>statistics</td><td>G1EvacuationStatistics</td><td>Evacuation Statistics</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1BasicIHOP</td><td>JVM ->  GC ->  Detailed</td><td>G1 Basic IHOP Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1BasicIHOP</td><td>JVM ->  GC ->  Detailed</td><td>G1 Basic IHOP Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Basic statistics related to current IHOP calculation</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -650,7 +1083,15 @@
 <tr><td>lastMarkingDuration</td><td>long</td><td>millis</td><td>Last Marking Duration</td><td>Last time from the end of the last concurrent start to the first mixed GC</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1AdaptiveIHOP</td><td>JVM ->  GC ->  Detailed</td><td>G1 Adaptive IHOP Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1AdaptiveIHOP</td><td>JVM ->  GC ->  Detailed</td><td>G1 Adaptive IHOP Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Statistics related to current adaptive IHOP calculation</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -666,7 +1107,17 @@
 <tr><td>predictionActive</td><td>boolean</td><td></td><td>Prediction Active</td><td>Indicates whether the adaptive IHOP prediction is active</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>PromoteObjectInNewPLAB</td><td>JVM ->  GC ->  Detailed</td><td>Promotion in new PLAB</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>PromoteObjectInNewPLAB</td><td>JVM ->  GC ->  Detailed</td><td>Promotion in new PLAB</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Object survived scavenge and was copied to a new Promotion Local Allocation Buffer (PLAB). Supported GCs are Parallel Scavenge, G1 and CMS with Parallel New. Due to promotion being done in parallel an object might be reported multiple times as the GC threads race to copy all objects.</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -679,7 +1130,17 @@
 <tr><td>plabSize</td><td>ulong</td><td>bytes</td><td>PLAB Size</td><td>Size of the allocated PLAB to which the object was copied</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>PromoteObjectOutsidePLAB</td><td>JVM ->  GC ->  Detailed</td><td>Promotion outside PLAB</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>PromoteObjectOutsidePLAB</td><td>JVM ->  GC ->  Detailed</td><td>Promotion outside PLAB</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Object survived scavenge and was copied directly to the heap. Supported GCs are Parallel Scavenge, G1 and CMS with Parallel New. Due to promotion being done in parallel an object might be reported multiple times as the GC threads race to copy all objects.</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -691,7 +1152,15 @@
 <tr><td>tenured</td><td>boolean</td><td></td><td>Tenured</td><td>True if object was promoted to Old space, otherwise the object was aged and copied to a Survivor space</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>PromotionFailed</td><td>JVM ->  GC ->  Detailed</td><td>Promotion Failed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>PromotionFailed</td><td>JVM ->  GC ->  Detailed</td><td>Promotion Failed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Promotion of an object failed</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -701,7 +1170,15 @@
 <tr><td>thread</td><td>Thread</td><td>Running thread</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>EvacuationFailed</td><td>JVM ->  GC ->  Detailed</td><td>Evacuation Failed</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>EvacuationFailed</td><td>JVM ->  GC ->  Detailed</td><td>Evacuation Failed</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Evacuation of an object failed</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -710,7 +1187,15 @@
 <tr><td>evacuationFailed</td><td>CopyFailed</td><td>Evacuation Failed Data</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ConcurrentModeFailure</td><td>JVM ->  GC ->  Detailed</td><td>Concurrent Mode Failure</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ConcurrentModeFailure</td><td>JVM ->  GC ->  Detailed</td><td>Concurrent Mode Failure</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>description</td><td>Concurrent Mode failed</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -718,34 +1203,14 @@
 <tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCPhasePause</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCPhasePause</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause</td><td><table class="attributeTable">
 <thead>
-<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+<tr><th>Name</th><th>Value</th></tr>
 </thead>
 <tbody>
-<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
-<tr><td>name</td><td>string</td><td>Name</td></tr>
+<tr><td>thread</td><td>true</td></tr>
 </tbody>
-</table></td></tr>
-<tr><td>GCPhasePauseLevel1</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 1</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
-<thead>
-<tr><th>Name</th><th>Type</th><th>Label</th></tr>
-</thead>
-<tbody>
-<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
-<tr><td>name</td><td>string</td><td>Name</td></tr>
-</tbody>
-</table></td></tr>
-<tr><td>GCPhasePauseLevel2</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 2</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
-<thead>
-<tr><th>Name</th><th>Type</th><th>Label</th></tr>
-</thead>
-<tbody>
-<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
-<tr><td>name</td><td>string</td><td>Name</td></tr>
-</tbody>
-</table></td></tr>
-<tr><td>GCPhasePauseLevel3</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 3</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -754,7 +1219,14 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCPhasePauseLevel4</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 4</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCPhasePauseLevel1</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 1</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -763,7 +1235,14 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCPhaseConcurrent</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Concurrent</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCPhasePauseLevel2</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 2</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -772,7 +1251,14 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCPhaseConcurrentLevel1</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Concurrent Level 1</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCPhasePauseLevel3</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 3</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -781,7 +1267,64 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCPhaseParallel</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Parallel</td><td>true</td><td>true</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCPhasePauseLevel4</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Pause Level 4</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhaseConcurrent</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Concurrent</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhaseConcurrentLevel1</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Concurrent Level 1</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
+<thead>
+<tr><th>Name</th><th>Type</th><th>Label</th></tr>
+</thead>
+<tbody>
+<tr><td>gcId</td><td>uint</td><td>GC Identifier</td></tr>
+<tr><td>name</td><td>string</td><td>Name</td></tr>
+</tbody>
+</table></td></tr>
+<tr><td>GCPhaseParallel</td><td>JVM ->  GC ->  Phases</td><td>GC Phase Parallel</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>description</td><td>GC phases for parallel workers</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -791,7 +1334,16 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>AllocationRequiringGC</td><td>JVM ->  GC ->  Detailed</td><td>Allocation Requiring GC</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>AllocationRequiringGC</td><td>JVM ->  GC ->  Detailed</td><td>Allocation Requiring GC</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -800,7 +1352,14 @@
 <tr><td>size</td><td>ulong</td><td>bytes</td><td>Allocation Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>TenuringDistribution</td><td>JVM ->  GC ->  Detailed</td><td>Tenuring Distribution</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>TenuringDistribution</td><td>JVM ->  GC ->  Detailed</td><td>Tenuring Distribution</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -810,7 +1369,15 @@
 <tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1HeapRegionTypeChange</td><td>JVM ->  GC ->  Detailed</td><td>G1 Heap Region Type Change</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1HeapRegionTypeChange</td><td>JVM ->  GC ->  Detailed</td><td>G1 Heap Region Type Change</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Information about a G1 heap region type change</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -822,7 +1389,14 @@
 <tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>Compilation</td><td>JVM ->  Compiler</td><td>Compilation</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>Compilation</td><td>JVM ->  Compiler</td><td>Compilation</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -837,7 +1411,14 @@
 <tr><td>inlinedBytes</td><td>ulong</td><td>bytes</td><td>Inlined Code Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CompilerPhase</td><td>JVM ->  Compiler</td><td>Compiler Phase</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CompilerPhase</td><td>JVM ->  Compiler</td><td>Compiler Phase</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -847,7 +1428,15 @@
 <tr><td>phaseLevel</td><td>ushort</td><td>Phase Level</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CompilationFailure</td><td>JVM ->  Compiler</td><td>Compilation Failure</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CompilationFailure</td><td>JVM ->  Compiler</td><td>Compilation Failure</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -856,7 +1445,15 @@
 <tr><td>compileId</td><td>uint</td><td>Compilation Identifier</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CompilerInlining</td><td>JVM ->  Compiler ->  Optimization</td><td>Method Inlining</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CompilerInlining</td><td>JVM ->  Compiler ->  Optimization</td><td>Method Inlining</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -869,7 +1466,14 @@
 <tr><td>bci</td><td>int</td><td>Bytecode Index</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SweepCodeCache</td><td>JVM ->  Code Sweeper</td><td>Sweep Code Cache</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SweepCodeCache</td><td>JVM ->  Code Sweeper</td><td>Sweep Code Cache</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -880,7 +1484,15 @@
 <tr><td>zombifiedCount</td><td>uint</td><td>Methods Zombified</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CodeCacheFull</td><td>JVM ->  Code Cache</td><td>Code Cache Full</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CodeCacheFull</td><td>JVM ->  Code Cache</td><td>Code Cache Full</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -896,7 +1508,16 @@
 <tr><td>fullCount</td><td>int</td><td></td><td>Full Count</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>Deoptimization</td><td>JVM ->  Compiler</td><td>Deoptimization</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>Deoptimization</td><td>JVM ->  Compiler</td><td>Deoptimization</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -911,7 +1532,15 @@
 <tr><td>action</td><td>DeoptimizationAction</td><td>Action</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SafepointBegin</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint Begin</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SafepointBegin</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint Begin</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Safepointing begin</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -921,7 +1550,15 @@
 <tr><td>jniCriticalThreadCount</td><td>int</td><td>JNI Critical Threads</td><td>The number of threads in JNI critical sections</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SafepointStateSynchronization</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint State Synchronization</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SafepointStateSynchronization</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint State Synchronization</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Synchronize run state of threads</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -932,7 +1569,15 @@
 <tr><td>iterations</td><td>int</td><td>Iterations</td><td>Number of state check iterations</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SafepointCleanup</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint Cleanup</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SafepointCleanup</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint Cleanup</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Safepointing begin running cleanup tasks</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -940,7 +1585,15 @@
 <tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SafepointCleanupTask</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint Cleanup Task</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SafepointCleanupTask</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint Cleanup Task</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Safepointing begin running cleanup tasks</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -949,7 +1602,15 @@
 <tr><td>name</td><td>string</td><td>Task Name</td><td>The task name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SafepointEnd</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint End</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SafepointEnd</td><td>JVM ->  Runtime ->  Safepoint</td><td>Safepoint End</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Safepointing end</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -957,7 +1618,15 @@
 <tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ExecuteVMOperation</td><td>JVM ->  Runtime</td><td>VM Operation</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ExecuteVMOperation</td><td>JVM ->  Runtime</td><td>VM Operation</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Execution of a VM Operation</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -969,7 +1638,17 @@
 <tr><td>safepointId</td><td>ulong</td><td>Safepoint Identifier</td><td>The safepoint (if any) under which this operation was completed</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>Shutdown</td><td>JVM ->  Runtime</td><td>JVM Shutdown</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>Shutdown</td><td>JVM ->  Runtime</td><td>JVM Shutdown</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>JVM shutting down</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -977,7 +1656,17 @@
 <tr><td>reason</td><td>string</td><td>Reason</td><td>Reason for JVM shutdown</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ObjectAllocationInNewTLAB</td><td>Java Application</td><td>Allocation in new TLAB</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ObjectAllocationInNewTLAB</td><td>Java Application</td><td>Allocation in new TLAB</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Allocation in new Thread Local Allocation Buffer</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -987,7 +1676,17 @@
 <tr><td>tlabSize</td><td>ulong</td><td>bytes</td><td>TLAB Size</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ObjectAllocationOutsideTLAB</td><td>Java Application</td><td>Allocation outside TLAB</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ObjectAllocationOutsideTLAB</td><td>Java Application</td><td>Allocation outside TLAB</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Allocation outside Thread Local Allocation Buffers</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -996,7 +1695,17 @@
 <tr><td>allocationSize</td><td>ulong</td><td>bytes</td><td>Allocation Size</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ObjectAllocationSample</td><td>Java Application</td><td>Object Allocation Sample</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ObjectAllocationSample</td><td>Java Application</td><td>Object Allocation Sample</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>throttle</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1005,7 +1714,18 @@
 <tr><td>weight</td><td>long</td><td>bytes</td><td>Sample Weight</td><td>The relative weight of the sample. Aggregating the weights for a large number of samples, for a particular class, thread or stack trace, gives a statistically accurate representation of the allocation pressure</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>OldObjectSample</td><td>JVM ->  Profiling</td><td>Old Object Sample</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>OldObjectSample</td><td>JVM ->  Profiling</td><td>Old Object Sample</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>A potential memory leak</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>cutoff</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1019,7 +1739,15 @@
 <tr><td>root</td><td>OldObjectGcRoot</td><td></td><td>GC Root</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>DumpReason</td><td>Flight Recorder</td><td>Recording Reason</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>DumpReason</td><td>Flight Recorder</td><td>Recording Reason</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Who requested the recording and why</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1028,7 +1756,15 @@
 <tr><td>recordingId</td><td>int</td><td>Recording Id</td><td>Id of the recording that triggered the dump, or -1 if it was not related to a recording</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>DataLoss</td><td>Flight Recorder</td><td>Data Loss</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>DataLoss</td><td>Flight Recorder</td><td>Data Loss</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Data could not be copied out from a buffer, typically because of contention</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1037,7 +1773,15 @@
 <tr><td>total</td><td>ulong</td><td>bytes</td><td>Total</td><td>Total lost amount for thread</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>JVMInformation</td><td>JVM</td><td>JVM Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>JVMInformation</td><td>JVM</td><td>JVM Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Description of JVM and the Java application</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1051,7 +1795,14 @@
 <tr><td>pid</td><td>long</td><td></td><td>Process Identifier</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>OSInformation</td><td>Operating System</td><td>OS Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>OSInformation</td><td>Operating System</td><td>OS Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1059,7 +1810,14 @@
 <tr><td>osVersion</td><td>string</td><td>OS Version</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>VirtualizationInformation</td><td>Operating System</td><td>Virtualization Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>VirtualizationInformation</td><td>Operating System</td><td>Virtualization Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1067,7 +1825,15 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>InitialSystemProperty</td><td>JVM</td><td>Initial System Property</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>InitialSystemProperty</td><td>JVM</td><td>Initial System Property</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>System Property at JVM start</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1076,7 +1842,14 @@
 <tr><td>value</td><td>string</td><td>Value</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>InitialEnvironmentVariable</td><td>Operating System</td><td>Initial Environment Variable</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>InitialEnvironmentVariable</td><td>Operating System</td><td>Initial Environment Variable</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1085,7 +1858,14 @@
 <tr><td>value</td><td>string</td><td>Value</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SystemProcess</td><td>Operating System</td><td>System Process</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SystemProcess</td><td>Operating System</td><td>System Process</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1094,7 +1874,14 @@
 <tr><td>commandLine</td><td>string</td><td>Command Line</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CPUInformation</td><td>Operating System ->  Processor</td><td>CPU Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CPUInformation</td><td>Operating System ->  Processor</td><td>CPU Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1106,7 +1893,14 @@
 <tr><td>hwThreads</td><td>uint</td><td>Hardware Threads</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CPUTimeStampCounter</td><td>Operating System ->  Processor</td><td>CPU Time Stamp Counter</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CPUTimeStampCounter</td><td>Operating System ->  Processor</td><td>CPU Time Stamp Counter</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1117,7 +1911,15 @@
 <tr><td>fastTimeFrequency</td><td>long</td><td>hertz</td><td>Fast Time Frequency</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CPULoad</td><td>Operating System ->  Processor</td><td>CPU Load</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CPULoad</td><td>Operating System ->  Processor</td><td>CPU Load</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>OS CPU Load</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1127,7 +1929,15 @@
 <tr><td>machineTotal</td><td>float</td><td>percentage</td><td>Machine Total</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadCPULoad</td><td>Operating System ->  Processor</td><td>Thread CPU Load</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ThreadCPULoad</td><td>Operating System ->  Processor</td><td>Thread CPU Load</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1136,7 +1946,14 @@
 <tr><td>system</td><td>float</td><td>percentage</td><td>System Mode CPU Load</td><td>System mode thread CPU load</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadContextSwitchRate</td><td>Operating System ->  Processor</td><td>Thread Context Switch Rate</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ThreadContextSwitchRate</td><td>Operating System ->  Processor</td><td>Thread Context Switch Rate</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1144,7 +1961,14 @@
 <tr><td>switchRate</td><td>float</td><td>hertz</td><td>Switch Rate</td><td>Number of context switches per second</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>NetworkUtilization</td><td>Operating System ->  Network</td><td>Network Utilization</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>NetworkUtilization</td><td>Operating System ->  Network</td><td>Network Utilization</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1154,7 +1978,14 @@
 <tr><td>writeRate</td><td>long</td><td>bits-per-second</td><td>Write Rate</td><td>Number of outgoing bits per second</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>JavaThreadStatistics</td><td>Java Application ->  Statistics</td><td>Java Thread Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>JavaThreadStatistics</td><td>Java Application ->  Statistics</td><td>Java Thread Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1165,7 +1996,14 @@
 <tr><td>peakCount</td><td>long</td><td>Peak Threads</td><td>Peak live thread count since JVM start or when peak count was reset</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ClassLoadingStatistics</td><td>Java Application ->  Statistics</td><td>Class Loading Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ClassLoadingStatistics</td><td>Java Application ->  Statistics</td><td>Class Loading Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1174,7 +2012,14 @@
 <tr><td>unloadedClassCount</td><td>long</td><td>Unloaded Class Count</td><td>Number of classes unloaded since JVM start</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ClassLoaderStatistics</td><td>Java Application ->  Statistics</td><td>Class Loader Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ClassLoaderStatistics</td><td>Java Application ->  Statistics</td><td>Class Loader Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1190,7 +2035,14 @@
 <tr><td>hiddenBlockSize</td><td>ulong</td><td>bytes</td><td>Total Hidden Classes Block Size</td><td>Total size of all allocated metaspace blocks for hidden classes (each chunk has several blocks)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>SymbolTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Symbol Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>SymbolTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Symbol Table Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1206,7 +2058,14 @@
 <tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>StringTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>String Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>StringTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>String Table Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1222,7 +2081,14 @@
 <tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>PlaceholderTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Placeholder Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>PlaceholderTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Placeholder Table Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1238,7 +2104,14 @@
 <tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>LoaderConstraintsTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Loader Constraints Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>LoaderConstraintsTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Loader Constraints Table Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1254,7 +2127,14 @@
 <tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ProtectionDomainCacheTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Protection Domain Cache Table Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ProtectionDomainCacheTableStatistics</td><td>JVM ->  Runtime ->  Tables</td><td>Protection Domain Cache Table Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1270,7 +2150,14 @@
 <tr><td>removalRate</td><td>float</td><td></td><td>Removal Rate</td><td>How many items were removed since last event (per second)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadAllocationStatistics</td><td>Java Application ->  Statistics</td><td>Thread Allocation Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ThreadAllocationStatistics</td><td>Java Application ->  Statistics</td><td>Thread Allocation Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1279,7 +2166,15 @@
 <tr><td>thread</td><td>Thread</td><td></td><td>Thread</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>PhysicalMemory</td><td>Operating System ->  Memory</td><td>Physical Memory</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>PhysicalMemory</td><td>Operating System ->  Memory</td><td>Physical Memory</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>OS Physical Memory</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1288,7 +2183,15 @@
 <tr><td>usedSize</td><td>ulong</td><td>bytes</td><td>Used Size</td><td>Total amount of physical memory in use</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ExecutionSample</td><td>JVM ->  Profiling</td><td>Method Profiling Sample</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ExecutionSample</td><td>JVM ->  Profiling</td><td>Method Profiling Sample</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Snapshot of a threads state</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1298,7 +2201,15 @@
 <tr><td>state</td><td>ThreadState</td><td>Thread State</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>NativeMethodSample</td><td>JVM ->  Profiling</td><td>Method Profiling Sample Native</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>NativeMethodSample</td><td>JVM ->  Profiling</td><td>Method Profiling Sample Native</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Snapshot of a threads state when in native</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1308,7 +2219,14 @@
 <tr><td>state</td><td>ThreadState</td><td>Thread State</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ThreadDump</td><td>JVM ->  Runtime</td><td>Thread Dump</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ThreadDump</td><td>JVM ->  Runtime</td><td>Thread Dump</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1316,7 +2234,14 @@
 <tr><td>result</td><td>string</td><td>Thread Dump</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>NativeLibrary</td><td>JVM ->  Runtime</td><td>Native Library</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>NativeLibrary</td><td>JVM ->  Runtime</td><td>Native Library</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1326,7 +2251,16 @@
 <tr><td>topAddress</td><td>ulong</td><td>address</td><td>Top Address</td><td>Ending address of the module</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ModuleRequire</td><td>JVM ->  Runtime ->  Modules</td><td>Module Require</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ModuleRequire</td><td>JVM ->  Runtime ->  Modules</td><td>Module Require</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+<tr><td>description</td><td>A directed edge representing a dependency</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1335,7 +2269,15 @@
 <tr><td>requiredModule</td><td>Module</td><td>Required Module</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ModuleExport</td><td>JVM ->  Runtime ->  Modules</td><td>Module Export</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ModuleExport</td><td>JVM ->  Runtime ->  Modules</td><td>Module Export</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1344,7 +2286,16 @@
 <tr><td>targetModule</td><td>Module</td><td>Target Module</td><td>Module to which the package is qualifiedly exported. If null or N/A, the package is unqualifiedly exported</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CompilerStatistics</td><td>JVM ->  Compiler</td><td>Compiler Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CompilerStatistics</td><td>JVM ->  Compiler</td><td>Compiler Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1362,7 +2313,16 @@
 <tr><td>totalTimeSpent</td><td>long</td><td>millis</td><td>Total time</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CompilerConfiguration</td><td>JVM ->  Compiler</td><td>Compiler Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CompilerConfiguration</td><td>JVM ->  Compiler</td><td>Compiler Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1371,7 +2331,16 @@
 <tr><td>tieredCompilation</td><td>boolean</td><td>Tiered Compilation</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CodeCacheStatistics</td><td>JVM ->  Code Cache</td><td>Code Cache Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CodeCacheStatistics</td><td>JVM ->  Code Cache</td><td>Code Cache Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1386,7 +2355,16 @@
 <tr><td>fullCount</td><td>int</td><td></td><td>Full Count</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CodeCacheConfiguration</td><td>JVM ->  Code Cache</td><td>Code Cache Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CodeCacheConfiguration</td><td>JVM ->  Code Cache</td><td>Code Cache Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1402,7 +2380,16 @@
 <tr><td>reservedTopAddress</td><td>ulong</td><td>address</td><td>Reserved Top</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CodeSweeperStatistics</td><td>JVM ->  Code Sweeper</td><td>Code Sweeper Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CodeSweeperStatistics</td><td>JVM ->  Code Sweeper</td><td>Code Sweeper Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1414,7 +2401,16 @@
 <tr><td>peakSweepTime</td><td>Tickspan</td><td>Peak Time Full Sweep</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>CodeSweeperConfiguration</td><td>JVM ->  Code Sweeper</td><td>Code Sweeper Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>CodeSweeperConfiguration</td><td>JVM ->  Code Sweeper</td><td>Code Sweeper Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1424,7 +2420,14 @@
 <tr><td>sweepThreshold</td><td>ulong</td><td>bytes</td><td>Sweep Threshold</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>IntFlag</td><td>JVM ->  Flag</td><td>Int Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>IntFlag</td><td>JVM ->  Flag</td><td>Int Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1434,7 +2437,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>UnsignedIntFlag</td><td>JVM ->  Flag</td><td>Unsigned Int Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>UnsignedIntFlag</td><td>JVM ->  Flag</td><td>Unsigned Int Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1444,7 +2454,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>LongFlag</td><td>JVM ->  Flag</td><td>Long Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>LongFlag</td><td>JVM ->  Flag</td><td>Long Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1454,7 +2471,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>UnsignedLongFlag</td><td>JVM ->  Flag</td><td>Unsigned Long Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>UnsignedLongFlag</td><td>JVM ->  Flag</td><td>Unsigned Long Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1464,7 +2488,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>DoubleFlag</td><td>JVM ->  Flag</td><td>Double Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>DoubleFlag</td><td>JVM ->  Flag</td><td>Double Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1474,7 +2505,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>BooleanFlag</td><td>JVM ->  Flag</td><td>Boolean Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>BooleanFlag</td><td>JVM ->  Flag</td><td>Boolean Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1484,7 +2522,14 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>StringFlag</td><td>JVM ->  Flag</td><td>String Flag</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>StringFlag</td><td>JVM ->  Flag</td><td>String Flag</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1494,7 +2539,15 @@
 <tr><td>origin</td><td>FlagValueOrigin</td><td>Origin</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ObjectCount</td><td>JVM ->  GC ->  Detailed</td><td>Object Count</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ObjectCount</td><td>JVM ->  GC ->  Detailed</td><td>Object Count</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1505,7 +2558,15 @@
 <tr><td>totalSize</td><td>ulong</td><td>bytes</td><td>Total Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>G1HeapRegionInformation</td><td>JVM ->  GC ->  Detailed</td><td>G1 Heap Region Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>G1HeapRegionInformation</td><td>JVM ->  GC ->  Detailed</td><td>G1 Heap Region Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Information about a specific heap region in the G1 GC</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1516,7 +2577,15 @@
 <tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>GC Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>GC Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>The configuration of the garbage collector</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1532,7 +2601,15 @@
 <tr><td>gcTimeRatio</td><td>uint</td><td></td><td>GC Time Ratio</td><td>Target for runtime vs garbage collection time</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCSurvivorConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>GC Survivor Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCSurvivorConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>GC Survivor Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>The configuration of the survivors of garbage collection</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1541,7 +2618,15 @@
 <tr><td>initialTenuringThreshold</td><td>ubyte</td><td>Initial Tenuring Threshold</td><td>Initial age limit for how old objects to keep in survivor area</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCTLABConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>TLAB Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCTLABConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>TLAB Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>The configuration of the Thread Local Allocation Buffers (TLABs)</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1551,7 +2636,15 @@
 <tr><td>tlabRefillWasteLimit</td><td>ulong</td><td>bytes</td><td>TLAB Refill Waste Limit</td><td></td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCHeapConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>GC Heap Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>GCHeapConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>GC Heap Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>The configuration of the garbage collected heap</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1565,7 +2658,15 @@
 <tr><td>heapAddressBits</td><td>ubyte</td><td></td><td>Heap Address Size</td><td>Heap Address Size (in bits)</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>YoungGenerationConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>Young Generation Configuration</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>YoungGenerationConfiguration</td><td>JVM ->  GC ->  Configuration</td><td>Young Generation Configuration</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>The configuration of the young generation of the garbage collected heap</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1575,7 +2676,15 @@
 <tr><td>newRatio</td><td>uint</td><td></td><td>New Ratio</td><td>The size of the young generation relative to the tenured generation</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZAllocationStall</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Allocation Stall</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZAllocationStall</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Allocation Stall</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Time spent waiting for memory to become available</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1584,7 +2693,16 @@
 <tr><td>size</td><td>ulong</td><td>bytes</td><td>Size</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZPageAllocation</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Page Allocation</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>ZPageAllocation</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Page Allocation</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Allocation of a ZPage</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1597,7 +2715,14 @@
 <tr><td>nonBlocking</td><td>boolean</td><td></td><td>Non-blocking</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZRelocationSet</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Relocation Set</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZRelocationSet</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Relocation Set</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1607,7 +2732,14 @@
 <tr><td>relocate</td><td>ulong</td><td>bytes</td><td>Relocate</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZRelocationSetGroup</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Relocation Set Group</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZRelocationSetGroup</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Relocation Set Group</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1619,7 +2751,15 @@
 <tr><td>relocate</td><td>ulong</td><td>bytes</td><td>Relocate</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZStatisticsCounter</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Statistics Counter</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZStatisticsCounter</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Statistics Counter</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>experimental</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1629,7 +2769,15 @@
 <tr><td>value</td><td>ulong</td><td>Value</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZStatisticsSampler</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Statistics Sampler</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZStatisticsSampler</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Statistics Sampler</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>experimental</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1638,7 +2786,15 @@
 <tr><td>value</td><td>ulong</td><td>Value</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZThreadPhase</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Thread Phase</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZThreadPhase</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Thread Phase</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>experimental</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1647,7 +2803,15 @@
 <tr><td>name</td><td>string</td><td>Name</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZUncommit</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Uncommit</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZUncommit</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Uncommit</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Uncommitting of memory</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1655,7 +2819,15 @@
 <tr><td>uncommitted</td><td>ulong</td><td>bytes</td><td>Uncommitted</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ZUnmap</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Unmap</td><td>true</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ZUnmap</td><td>JVM ->  GC ->  Detailed</td><td>ZGC Unmap</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Unmapping of memory</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1663,7 +2835,15 @@
 <tr><td>unmapped</td><td>ulong</td><td>bytes</td><td>Unmapped</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ShenandoahHeapRegionStateChange</td><td>JVM ->  GC ->  Detailed</td><td>Shenandoah Heap Region State Change</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ShenandoahHeapRegionStateChange</td><td>JVM ->  GC ->  Detailed</td><td>Shenandoah Heap Region State Change</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Information about a Shenandoah heap region state change</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1675,7 +2855,15 @@
 <tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>ShenandoahHeapRegionInformation</td><td>JVM ->  GC ->  Detailed</td><td>Shenandoah Heap Region Information</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>ShenandoahHeapRegionInformation</td><td>JVM ->  GC ->  Detailed</td><td>Shenandoah Heap Region Information</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Information about a specific heap region in the Shenandoah GC</td></tr>
+<tr><td>period</td><td>everyChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1686,7 +2874,15 @@
 <tr><td>used</td><td>ulong</td><td>bytes</td><td>Used</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>Flush</td><td>Flight Recorder</td><td>Flush</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>Flush</td><td>Flight Recorder</td><td>Flush</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>experimental</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>ContentType</th><th>Label</th></tr>
 </thead>
@@ -1696,7 +2892,15 @@
 <tr><td>size</td><td>ulong</td><td>bytes</td><td>Size Written</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>HeapDump</td><td>JVM ->  Diagnostics</td><td>Heap Dump</td><td>true</td><td>false</td><td>true</td><td><table class="fieldTable">
+<tr><td>HeapDump</td><td>JVM ->  Diagnostics</td><td>Heap Dump</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>stackTrace</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th></tr>
 </thead>
@@ -1707,7 +2911,16 @@
 <tr><td>onOutOfMemoryError</td><td>boolean</td><td>On Out of Memory Error</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>GCLocker</td><td>JVM ->  GC ->  Detailed</td><td>GC Locker</td><td>true</td><td>true</td><td>true</td><td><table class="fieldTable">
+<tr><td>GCLocker</td><td>JVM ->  GC ->  Detailed</td><td>GC Locker</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>startTime</td><td>true</td></tr>
+<tr><td>thread</td><td>true</td></tr>
+<tr><td>stackTrace</td><td>true</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>
@@ -1716,7 +2929,17 @@
 <tr><td>stallCount</td><td>uint</td><td>Stall Count</td><td>The number of Java threads stalled by the GC locker</td></tr>
 </tbody>
 </table></td></tr>
-<tr><td>FinalizerStatistics</td><td>Java Application ->  Statistics</td><td>Finalizer Statistics</td><td>false</td><td>false</td><td>false</td><td><table class="fieldTable">
+<tr><td>FinalizerStatistics</td><td>Java Application ->  Statistics</td><td>Finalizer Statistics</td><td><table class="attributeTable">
+<thead>
+<tr><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>description</td><td>Per class statistics about finalizers</td></tr>
+<tr><td>thread</td><td>false</td></tr>
+<tr><td>startTime</td><td>false</td></tr>
+<tr><td>period</td><td>endChunk</td></tr>
+</tbody>
+</table></td><td><table class="fieldTable">
 <thead>
 <tr><th>Name</th><th>Type</th><th>Label</th><th>Description</th></tr>
 </thead>

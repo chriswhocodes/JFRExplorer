@@ -17,9 +17,6 @@ public class MetadataProcessor
 	private static final String ATTR_NAME = "name";
 	private static final String ATTR_LABEL = "label";
 	private static final String ATTR_CATEGORY = "category";
-	private static final String ATTR_START_TIME = "startTime";
-	private static final String ATTR_STACK_TRACE = "stackTrace";
-	private static final String ATTR_THREAD = "thread";
 	private static final String ATTR_TYPE = "type";
 	private static final String ATTR_CONTENT_TYPE = "contentType";
 	private static final String ATTR_DESCRIPTION = "description";
@@ -175,8 +172,7 @@ public class MetadataProcessor
 
 	private Event handleEvent()
 	{
-		Event event = new Event(getStringAttr(ATTR_NAME), getStringAttr(ATTR_CATEGORY), getStringAttr(ATTR_LABEL),
-				getBooleanAttr(ATTR_THREAD), getBooleanAttr(ATTR_START_TIME), getBooleanAttr(ATTR_STACK_TRACE));
+		Event event = new Event(getStringAttr(ATTR_NAME), getStringAttr(ATTR_CATEGORY), getStringAttr(ATTR_LABEL), attrMap);
 
 		String nextLine = getNextLine();
 
